@@ -17,7 +17,7 @@ You don't need to know how to code. You do need a Windows PC, a Roblox account a
 | winget (Windows' app installer, used by the commands below; already on Windows 10/11) | Optional | https://learn.microsoft.com/en-us/windows/package-manager/winget/ |
 | Python (for the picture tools) | Optional | https://www.python.org/downloads/windows/ |
 | Pillow and NumPy (Python add-ons for the picture tools) | Optional | https://pypi.org/project/pillow/ and https://pypi.org/project/numpy/ |
-| GitHub account (online backup) | Optional | https://github.com/signup |
+| GitHub account (online backup) | Optional (recommended for an online backup) | https://github.com/signup |
 | GitHub CLI (lets Claude make the private backup repo) | Optional | https://cli.github.com/ |
 
 ---
@@ -92,7 +92,7 @@ This folder stays as your master copy. Each new game is made as a copy of it in 
   winget install --id Python.Python.3.12 -e
   py -m pip install pillow numpy
   ```
-- **GitHub backup** (keeps a copy of your game online, private). Make a free account at https://github.com/signup, install the GitHub CLI from https://cli.github.com/, or in PowerShell:
+- **GitHub backup** (keeps a copy of your game online, private). Recommended if you want an online backup of your work: without it, your game folder (the build plan, the backup copy of the game and Claude's notes on unfinished work) is only on this PC. The game itself is still saved to your Roblox account either way. Make a free account at https://github.com/signup, install the GitHub CLI from https://cli.github.com/, or in PowerShell:
   ```
   winget install --id GitHub.cli -e
   gh auth login

@@ -30,7 +30,7 @@ You are helping me build the Roblox game "{{GAME_NAME}}" in my open Roblox Studi
 
 ## Handoff check (first thing every session)
 - Run `git log -5` and read the last commits' descriptions. If any has a "HANDOFF" section, finish/check those items before anything else and tell me what it said (the `handoff` skill).
-- Whenever a task is left unfinished (session ending, blocked, stopping mid-item): save the game with the `save-game` skill, then commit and push with a "HANDOFF" section in the commit description saying what is done, what is NOT done, what needs checking, and where it is in Studio.
+- Whenever a task is left unfinished (session ending, blocked, stopping mid-item): save the game with the `save-game` skill, then commit (and push, if the repo has a remote) with a "HANDOFF" section in the commit description saying what is done, what is NOT done, what needs checking, and where it is in Studio.
 - If an earlier HANDOFF is still open, the new note repeats it in full and adds the new part after it.
 - Open or closed: the newest commit with a "HANDOFF" or "HANDOFF CLOSED" line decides. Partly finished = a new HANDOFF with finished items marked "[done]". Fully finished = the commit that completes it says "HANDOFF CLOSED (was <hash>): all done", and only when the matching task-file checkboxes are ticked "- [x]".
 

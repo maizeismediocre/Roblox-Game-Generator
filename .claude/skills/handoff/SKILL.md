@@ -9,7 +9,7 @@ The newest commit whose message has "HANDOFF" or "HANDOFF CLOSED" decides whethe
 
 ## Leaving a task unfinished
 1. `save-game` first (always, even near the usage limit).
-2. Commit + push with a "HANDOFF" section: done / NOT done / needs checking / where in Studio.
+2. Commit + push (push only if `git remote` shows one) with a "HANDOFF" section: done / NOT done / needs checking / where in Studio. Handoffs are read from local `git log`, so they work without GitHub.
 3. Note it in the progress log (`log-phase`).
 
 ## Committing while a HANDOFF is open
