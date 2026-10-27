@@ -1,0 +1,15 @@
+---
+name: add-asset
+description: Rules for adding ANY outside asset to {{GAME_NAME}} (sound, music, mesh, image/decal, font, Creator Store model) - licence check for a game that may earn money, allowed audio creators, one new sound slot per new moment, and where to record it. Use every time a sound or any other outside asset is added or swapped, or when the user types /add-asset.
+---
+
+# Adding an outside asset (the game may earn money)
+
+1. **Licence first.** Before adding any outside asset (sound, music, mesh, image/decal, font, Creator Store model), check its licence allows use in a commercial Roblox experience with no fee. Prefer CC0 / no attribution. CC BY 3.0 and CC BY 4.0 are allowed when nothing CC0 fits - try to avoid them, and every one MUST be added to `CREDITS.md` (repo root) with the full credit text and shown in an in-game Settings > Credits list. Anything else (non-commercial, share-alike, unclear): don't use it; ask the user.
+   Icons must be DOWNLOADED free-use icons (CC0 first, e.g. Kenney; CC BY e.g. game-icons.net), finished with a black outline (`tools/icons/finish.py`). Draw one only when nothing fits. Pictures of the game's own models come from `model-photos`.
+2. **Audio creators allowed:** "Roblox", the licensed partner libraries "ProSoundEffects" and "APMOfficial", or the user's own uploads. Never other users' uploads, nothing that sounds like a copyrighted song, game or TV sound.
+   Find candidates with the Creator Store API (no install needed): `https://apis.roblox.com/toolbox-service/v2/assets:search?searchCategoryType=Audio&query=<words>&maxPageSize=100` (keep only the allowed creators), and `toolbox-service/v1/items/details?assetIds=...` for details.
+3. **Every new moment that should make a sound gets its OWN new slot** in `ReplicatedStorage/Shared/Config/Sounds`, filled with a NEW licensed sound. Never leave it silent and never reuse another slot's sound. Play it through the existing SoundController.
+4. **Record it:** creator + source/licence for every asset - in Config/Sounds for sounds, in the progress log (DevNotes) for others, and in `CREDITS.md` ONLY when its licence requires a credit (CC BY).
+5. Images you make or download are uploaded with the MCP `upload_image` tool: serve the folder with `py -I -m http.server 8765 --bind 127.0.0.1 --directory <dir>` in the background, upload `http://127.0.0.1:8765/<file>`, then stop the server.
+6. Never install software, packages or Studio plugins to get an asset without asking the user first (see CLAUDE.md).

@@ -1,0 +1,19 @@
+{
+  "enabledMcpjsonServers": ["Roblox_Studio"],
+  "permissions": {
+    "allow": ["mcp__Roblox_Studio"]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf %s \"{\\\"hookSpecificOutput\\\":{\\\"hookEventName\\\":\\\"SessionStart\\\",\\\"additionalContext\\\":\\\"Context was just cleared. If SETUP.md exists in the project folder, read SETUP.md and carry on with the setup. Otherwise read instructions.md and continue the game work: git log -5 HANDOFF check first, then the next task (no health check unless the user asks).\\\"}}\""
+          }
+        ]
+      }
+    ]
+  }
+}

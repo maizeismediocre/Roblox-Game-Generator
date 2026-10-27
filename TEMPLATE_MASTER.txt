@@ -1,0 +1,6 @@
+This file marks the MASTER copy of the Roblox game template.
+
+When setup runs in a folder that has this file, Claude leaves this folder untouched and makes a
+copy of it for the new game (without this file). Keep this file here so the template stays reusable.
+If you copy the template yourself and run setup in the copy, delete this file from the copy first
+(or let setup copy it for you).

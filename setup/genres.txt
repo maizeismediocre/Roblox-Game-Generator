@@ -1,0 +1,33 @@
+# One genre per line: Genre | short description. Lines starting with # are ignored.
+Simulator | Collect, upgrade and grow your numbers, then unlock bigger areas.
+Tycoon | Build and run a business that earns money while you play.
+Obby | An obstacle course of jumps, traps and checkpoints.
+Tower defense | Place defenders along a path to stop waves of (friendly-looking) invaders.
+Pet collecting | Find, hatch, raise and show off a growing team of pets.
+Farming and gardening | Plant, grow, harvest and sell crops in your own garden.
+Fishing | Cast, reel in and collect fish from different waters.
+Cooking and restaurant | Cook orders and run a busy kitchen with friends.
+Mining and digging | Dig deeper, find rarer ores and upgrade your tools.
+Idle clicker | Tap to earn, buy upgrades that earn for you, and prestige.
+Merge | Combine two of the same thing to make a better one.
+Racing | Race karts, boats or animals and upgrade your ride.
+Battle arena | Short friendly fights with abilities, knockback and no gore.
+Survival | Gather, craft and build to get through the night.
+Adventure and quests | Explore a world, help characters and finish quests.
+Puzzle | Solve rooms or levels with switches, blocks and clever thinking.
+Escape room | Find clues and solve puzzles together to get out in time.
+Hide and seek | One team hides, the other team seeks, in a fun map.
+Party minigames | Short random minigames played in rounds with friends.
+Roleplay town | A town where players pick jobs and act out daily life.
+Sports | Soccer, basketball or a made-up sport with simple controls.
+Parkour and movement | Wall-runs, slides and big jumps through a stylish course.
+Building and sandbox | Build anything from blocks and share it with others.
+Zoo and park management | Design a park, look after animals or rides, and please visitors.
+Delivery and driving | Drive around a town delivering things against the clock.
+Sailing and islands | Sail between islands, trade and discover secrets.
+Card battler | Collect cards and win turn-based battles with a deck.
+Dungeon crawler | Team up to clear rooms of monsters and grab loot.
+Rhythm | Hit the beats in time to music to score points.
+Pet care | Feed, clean, play with and dress up your own pet.
+Space exploration | Fly to planets, gather resources and build a base.
+Magic school | Learn spells, brew potions and do lessons with friends.
