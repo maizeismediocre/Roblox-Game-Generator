@@ -58,7 +58,7 @@ Claude Code is the version of Claude that can work with files and programs on yo
    - Pick any colour theme.
    - Choose to log in with your **Claude account (subscription)**. Your web browser opens: sign in to Claude and click **Authorize**, then go back to the PowerShell window and press **Enter** to carry on.
    - If it asks whether you trust the files in this folder, choose **Yes**.
-5. When you see a box where you can type a message, Claude is ready. **Leave this window open** for the next step.
+5. When you see a box where you can type a message, Claude is ready. Type `/exit` and press Enter to close it for now (you stay signed in).
    (If the install command doesn't work, follow the current instructions at https://code.claude.com/docs/en/setup.)
 
 Useful to know: you **start** Claude by typing `claude` in PowerShell, and **close** it by typing `/exit` (or by closing the window). Commands that start with `/` are for Claude itself; everything else you type is a message to Claude.
@@ -67,11 +67,10 @@ Useful to know: you **start** Claude by typing `claude` in PowerShell, and **clo
 "MCP" is the link that lets Claude click, build and test inside Roblox Studio. Roblox's guide: https://create.roblox.com/docs/studio/mcp
 1. Open Roblox Studio and open any place (e.g. **File > New > Baseplate**, or click **Baseplate** on Studio's start page).
 2. Open the **Assistant** window: click the **Assistant** button in Studio's toolbar (near the top right), or find **Assistant** in the **Window** / **View** menu.
-3. In the Assistant window, click the **...** (three dots) button. This opens the **Assistant Settings** window.
-4. Click **MCP Servers** on the left.
-5. Turn on **Enable Studio as MCP server**, then close the Assistant Settings window. You don't need the **Quick connect** section: this template connects Claude for you.
-6. If Claude is open in PowerShell, type `/exit` and press Enter to close it (it picks up the connection the next time it starts).
-7. Check it worked: in a PowerShell window, paste this and press Enter. It should say **True**:
+3. In the Assistant window, click the **...** (three dots) button (top right), then click **Settings** (in some Studio versions it's called **Manage MCP Servers**). This opens the **Assistant Settings** window.
+4. Click **MCP Servers** on the left (skip this if it's already showing).
+5. Turn on **Enable Studio as MCP server**, then close the Assistant Settings window. Skip the **Quick connect** dropdown (don't paste its Claude Code command anywhere): the template's `.mcp.json` file already connects Claude Code to Studio. (Only if you use the Claude desktop app instead of PowerShell, see [Using the Claude desktop app](#using-the-claude-desktop-app-instead-of-the-terminal).)
+6. Check it worked: in a PowerShell window, paste this and press Enter. It should say **True**:
    ```
    Test-Path "$env:LOCALAPPDATA\Roblox\mcp.bat"
    ```
@@ -127,7 +126,7 @@ This folder stays as your master copy. Each new game is made as a copy of it in 
 - Claude asks you to help with the first **Save to Roblox** (it creates the game on your Roblox account): check the owner and click **Create**.
 - It then asks you to turn on **Enable Studio Access to API Services** (needed for saving player data in tests): in Studio open **Game Settings** (in the **File** menu, or the **Game Settings** button on the **Home** tab), click **Security**, turn on **Enable Studio Access to API Services**, and click **Save**.
 - After that Claude works on its own: it builds, tests, saves and moves on. You can watch, but don't click around in Studio while it's working, because it uses Studio too.
-- **Effort level:** before each task Claude says which effort level suits it. To change it, type `/effort high` (or `/effort medium`) and press Enter. Higher effort gives better models and art but uses more of your Claude plan.
+- **Effort level:** before each task Claude says which effort level suits it. To change it, type `/effort high` (or `/effort medium`) and press Enter. Higher effort gives better 3D models and art but uses more of your Claude plan.
 - **To stop Claude** in the middle of something, press **Esc**. Type a message to tell it what to do next.
 
 ### Every session after that
@@ -139,7 +138,7 @@ This folder stays as your master copy. Each new game is made as a copy of it in 
 Claude Pro/Max plans have usage limits. If Claude says you've hit your limit, it tells you when it resets. Leave Studio and Claude open and, after the reset, type `continue`. If you closed everything, open Studio with the game and use the **(auto)** shortcut: Claude saves its place in git as it goes and picks up where it left off.
 
 ### Using the Claude desktop app instead of the terminal
-The Code part of the Claude desktop app works too: open the template folder as the project and type `read SETUP.md`; later open the game folder and type `read instructions.md and continue`. No desktop shortcuts are made there. If the Studio tools don't show up in the app, connect it from Studio once: **Assistant > ... (Assistant Settings) > MCP Servers > Quick connect > Claude Desktop** and follow the instructions it shows (see https://create.roblox.com/docs/studio/mcp). The normal chat part of the desktop app can't do this (it can't run the scripts, saves or git).
+The Code part of the Claude desktop app works too: open the template folder as the project and type `read SETUP.md`; later open the game folder and type `read instructions.md and continue`. No desktop shortcuts are made there. The app should pick up the template's `.mcp.json` by itself. If the Studio tools don't show up (ask Claude "can you see the Roblox Studio tools?"), connect it from Studio once: **Assistant > ... > Settings > MCP Servers**, open the **Quick connect** dropdown, click **Claude Desktop** and do what it shows (it only appears once the Claude app is installed; if it's missing, restart Studio), then fully quit the Claude app (right-click its icon in the taskbar's hidden-icons area > **Quit**) and open it again. Still nothing? Click **Claude Code** in the same dropdown, copy the command it shows, paste it into PowerShell opened in your game folder and press Enter, then restart the app again (see https://create.roblox.com/docs/studio/mcp). The normal chat part of the desktop app can't do this (it can't run the scripts, saves or git).
 
 ---
 
@@ -149,7 +148,7 @@ The Code part of the Claude desktop app works too: open the template folder as t
 | `claude` is "not recognized" | Close and reopen PowerShell after installing. If it still fails, reinstall Claude Code (Part 1, step 3), or see https://code.claude.com/docs/en/troubleshoot-install. |
 | `git` is "not recognized" | Close and reopen PowerShell after installing Git. If it still fails, run the Git installer again (Part 1, step 2). |
 | Claude says it can't log in, or your plan doesn't include Claude Code | Claude Code needs a Pro or Max plan. Type `/login` in Claude to sign in again. |
-| Claude says the Studio tools aren't connected | Studio must be open with a place, and its MCP server on (Part 1, step 4). If you opened Studio *after* Claude, type `/mcp` in Claude, pick **Roblox_Studio** and choose **Reconnect** (or type `/exit` and start Claude again). In Studio, **Assistant > ... (Assistant Settings) > MCP Servers** shows a green light and "1 client connected" when Claude is connected. |
+| Claude says the Studio tools aren't connected | Studio must be open with a place, and its MCP server on (Part 1, step 4). If you opened Studio *after* Claude, type `/mcp` in Claude, pick **Roblox_Studio** and choose **Reconnect** (or type `/exit` and start Claude again). In Studio, **Assistant > ... > Settings > MCP Servers** shows a green light and "1 client connected" when Claude is connected. |
 | `mcp.bat` doesn't exist (the check says **False**) | Studio's MCP server isn't turned on yet (Part 1, step 4). |
 | PowerShell opened in the wrong folder | Close it and open the right folder in File Explorer first, then type `powershell` in its address bar. Setup must start in the template folder; game sessions must start in the game folder. |
 | Player data doesn't save in tests | The game must be saved to Roblox once, and **Enable Studio Access to API Services** must be on (Game Settings > Security). |
@@ -170,10 +169,11 @@ The Code part of the Claude desktop app works too: open the template folder as t
 | `.claude/skills/` | Step-by-step skills: save-game, model-qa, new-character, seasonal-event, model-photos, log-phase, handoff, health-check, start-2p-test, screen-capture, player-text, add-asset |
 | `studio_tools/` | Studio tool modules (ModelKit: blocky model builder + quality checkers; SceneryScan) installed into the game in Build Phase 1 |
 | `tools/` | Picture tools (model cut-outs, store-page image editing, a font) and `make-shortcuts.ps1` |
+| `CREDITS.md` | Credits for outside assets whose licence asks for one (also shown in the game's Settings > Credits) |
 | `store_page/` | Where the store description, thumbnails and icons go |
 | `TEMPLATE_MASTER.txt` | Marks this folder as the master copy (setup copies instead of changing it) |
 
 ## How the work is organised
 - Numbered task files (`01_build.md` ... `07_store_page.md`), each a checklist: build, economy, art, polish, live-ops, quality QA, store page. Claude does the first unticked item, tests it itself, logs it in the game (ServerStorage/DevNotes), saves the place (Save to Roblox + a backup `.rbxl` file), commits, and moves on. It stops at the end of each task file or when the topic changes, so you can `/clear` and continue fresh.
 - Unfinished work is handed over in a "HANDOFF" note in the git commit, so the next session picks it up.
-- Claude never publishes the game. When it's ready, you publish it yourself (File > Publish to Roblox) and fill in the store page with the description and pictures from `store_page/`.
+- Claude won't publish the game unless you ask it to; normally you publish it yourself when it's ready (File > Publish to Roblox) and fill in the store page with the description and pictures from `store_page/`.

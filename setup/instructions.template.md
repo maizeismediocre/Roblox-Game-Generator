@@ -35,7 +35,7 @@ You are helping me build the Roblox game "{{GAME_NAME}}" in my open Roblox Studi
 - Open or closed: the newest commit with a "HANDOFF" or "HANDOFF CLOSED" line decides. Partly finished = a new HANDOFF with finished items marked "[done]". Fully finished = the commit that completes it says "HANDOFF CLOSED (was <hash>): all done", and only when the matching task-file checkboxes are ticked "- [x]".
 
 ## Studio check (every session, quick)
-- Confirm the Studio MCP tools respond (`list_roblox_studios`, then list the children of Workspace). If they don't, STOP and tell me: Roblox Studio must be open with the game, and Studio's MCP server must be on (Assistant window > ... (Assistant Settings) > MCP Servers > Enable Studio as MCP server). After turning it on, I restart Claude with the desktop shortcut.
+- Confirm the Studio MCP tools respond (`list_roblox_studios`, then list the children of Workspace). If they don't, STOP and tell me: Roblox Studio must be open with the game, and Studio's MCP server must be on (Assistant window > ... > Settings > MCP Servers > Enable Studio as MCP server). After turning it on, I restart Claude with the desktop shortcut.
 - If the `save-game` skill still says `{{PLACE_ID}}`, the game has never been saved to Roblox: do its "First save" section before anything else.
 
 ## Start-of-session health check - only when I ask
