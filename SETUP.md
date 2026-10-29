@@ -1,11 +1,11 @@
 # Roblox game template — first-time setup (for Claude)
 
-The user has asked you to read this file. Run the setup below from start to finish. It turns this template into a ready-to-build Roblox game project: pick a genre, generate an original game idea, write the task files, write `instructions.md`, delete the setup files, and offer desktop shortcuts.
+The user has asked you to read this file. Run the setup below from start to finish. It turns this template into a ready-to-build Roblox game project: pick a genre, generate an original game idea, write the task files, write `instructions.md`, delete the setup files, and offer a desktop shortcut.
 
 ## Rules while setting up
 - The user may be a total beginner. Plain, friendly English; short progress lines; no jargon without a few words explaining it.
 - Use the AskUserQuestion tool for every choice (the user can always type their own answer with "Other").
-- Don't change anything outside the project folder, except the copy step (step 5) and the desktop shortcuts (step 8, Claude CLI only).
+- Don't change anything outside the project folder, except the copy step (step 5) and the desktop shortcut (step 8, Claude CLI only).
 - Never install anything without asking first (CLAUDE.md "Installs").
 - Files with Windows paths or backslashes: write them with the Write tool, not shell heredocs (heredocs mangle `\\`).
 - Everything in CLAUDE.md "Always" applies to the idea too: original game, no offensive or religious symbols, no slang names, web-searched names.
@@ -17,7 +17,7 @@ The user has asked you to read this file. Run the setup below from start to fini
 ## 2. Quick checks (one progress line, don't stop on problems)
 Run these and report one line, e.g. "Checks: git OK, Claude OK, Studio MCP found".
 - `git --version` (needed for saving history). If missing, tell the user it's needed and offer to explain how to install Git for Windows (don't install it yourself).
-- `$env:CLAUDE_CODE_ENTRYPOINT` (PowerShell): `cli` = the terminal Claude CLI (desktop shortcuts are offered in step 8); anything else = no shortcuts. Only when it is `cli`, also check `where.exe claude` (the shortcuts need it).
+- `$env:CLAUDE_CODE_ENTRYPOINT` (PowerShell): `cli` = the terminal Claude CLI (a desktop shortcut is offered in step 8); anything else = no shortcut. Only when it is `cli`, also check `where.exe claude` (the shortcut needs it).
 - `Test-Path "$env:LOCALAPPDATA\Roblox\mcp.bat"` (PowerShell). This is the Roblox Studio MCP server that `.mcp.json` starts automatically.
   - If it's missing, Studio's MCP server hasn't been turned on yet. Tell the user: open Roblox Studio, open the **Assistant** window, click its **...** button (top right) > **Settings** > **MCP Servers** tab, and turn on **Enable Studio as MCP server** (if the menus look different, web-search "Roblox Studio enable MCP server" and give the current steps). Then restart Claude in the project (type `/exit`, then `claude` in the same window; or later use the desktop shortcut once it exists). Setup carries on without it; only the game building needs it.
 - If the Roblox_Studio tools are available now, call `list_roblox_studios` and note whether Studio is open.
@@ -96,7 +96,7 @@ It replaces `{{GAME_NAME}}`, `{{GAME_ID}}`, `{{PROJECT_DIR}}`, and `{{BACKUP_FIL
 
 **e. Store page + readme.**
 - `store_page/description.txt`: keep the template's structure; fill the TITLE OPTIONS with the 3 name ideas. The description itself stays empty until features are built and tested (`player-text`).
-- Replace `README.md` with a short project readme: the pitch card, how to start a session (if shortcuts were made: "double-click the '<GAME_NAME> - Claude (auto)' shortcut, or"; always: "open Claude in this folder and type: read instructions.md and continue"), and the task-file list.
+- Replace `README.md` with a short project readme: the pitch card, how to start a session (if the shortcut was made: "double-click the '<GAME_NAME> - Keep Building' shortcut, or"; always: "open Claude in this folder and type: read instructions.md and continue"), and the task-file list.
 
 **f. Remove setup.** In PROJECT: delete the block between `<!-- SETUP-PENDING:START` and `SETUP-PENDING:END -->` (both lines included) from CLAUDE.md, then delete `SETUP.md` and the `setup/` folder. Check `TEMPLATE_MASTER.txt` is not in PROJECT.
 
@@ -107,17 +107,22 @@ It replaces `{{GAME_NAME}}`, `{{GAME_ID}}`, `{{PROJECT_DIR}}`, and `{{BACKUP_FIL
 - If not: give the step-2 instructions for turning on Studio's MCP server once more, and say Build Phase 1 starts by checking the connection.
 - Tell the user what to have ready for the first session: Roblox Studio open with a NEW **Baseplate** place (File > New > Baseplate). Build Phase 1 does the first "Save to Roblox" with them, which creates the game on their Roblox account.
 
-## 8. Desktop shortcuts (only in the Claude CLI)
-The shortcuts open the command-line Claude (`claude` in a terminal), so only offer them when setup is running there. Check (PowerShell): `$env:CLAUDE_CODE_ENTRYPOINT`.
-- If it is NOT exactly `cli` (e.g. the Claude desktop app, an IDE extension, the web): skip this step completely, don't ask and don't make shortcuts. Just tell the user that next time they open the game folder (<PROJECT>) as the project in the same app and type "read instructions.md and continue".
+## 8. Desktop shortcut (only in the Claude CLI)
+The shortcut opens the command-line Claude (`claude` in a terminal), so only offer it when setup is running there. Check (PowerShell): `$env:CLAUDE_CODE_ENTRYPOINT`.
+- If it is NOT exactly `cli` (e.g. the Claude desktop app, an IDE extension, the web): skip this step completely, don't ask and don't make a shortcut. Just tell the user that next time they open the game folder (<PROJECT>) as the project in the same app and type "read instructions.md and continue".
 - If it is `cli`: ask as below.
 
-Ask (header "Shortcuts"): "Make two desktop shortcuts for this game?" with options:
-- **Yes, make both (Recommended)** - "'<GAME_NAME> - Claude' opens Claude in the game folder. '<GAME_NAME> - Claude (auto)' also types 'read instructions.md and continue' for you. Both start a Remote Control session named '<GAME_NAME>', so you can follow along from your phone or another computer."
+Ask (header "Shortcut"): "Make a desktop shortcut for this game?" with options:
+- **Yes (Recommended)** - "'<GAME_NAME> - Keep Building' opens Claude in the game folder and carries on with the next task. To ask Claude something instead, press Esc once it starts and type."
 - **No thanks**
-If yes, run (PowerShell): `powershell -ExecutionPolicy Bypass -File "<PROJECT>\tools\make-shortcuts.ps1" -ProjectDir "<PROJECT>" -Name "<GAME_NAME>"` and report the two shortcut paths it prints. (The script stays in `tools/` so they can be remade later.)
+
+In the same AskUserQuestion call, ask a second question (header "Remote ctrl"; only used if they say yes to the shortcut): "Should the shortcut also turn on Remote Control (the same as typing /rc in Claude)?" with options:
+- **Yes, turn it on (Recommended)** - "Lets you watch and steer this Claude session from the Claude app on your phone, or from claude.ai/code on another computer, using the same Claude account. Useful because building takes hours: Claude often stops to ask 'Do you want to proceed?' or a question, and you can answer from your phone instead of the build waiting until you're back at your PC. Your PC must stay on with the Claude window open, since the work still happens there."
+- **No, just this PC** - "The session can only be used at this PC. You can still turn it on for one session by typing /rc in Claude."
+
+If yes to the shortcut, run (PowerShell): `powershell -ExecutionPolicy Bypass -File "<PROJECT>\tools\make-shortcuts.ps1" -ProjectDir "<PROJECT>" -Name "<GAME_NAME>"`, adding ` -NoRemoteControl` if they said no to Remote Control, and report the shortcut path it prints. If Remote Control is on, tell them: sign in to the Claude app on their phone with the same account and look for the session named '<GAME_NAME>'; to get a phone notification when Claude needs an answer, type `/config` in Claude and turn on **Push when actions required**. (The script stays in `tools/` so it can be remade later.)
 
 ## 9. Finish
-Give a short summary: the game (name + pitch line), the folder, the task files and their item counts, GitHub status, the shortcuts, and the first task (`01_build.md` Build Phase 1) with the effort level to use (high). Then:
-- If setup ran from the master template: "This window is still in the template folder. Close it and start the game with the new shortcut" (if shortcuts were made) or "open <PROJECT> as the project and type: read instructions.md and continue" (if not).
+Give a short summary: the game (name + pitch line), the folder, the task files and their item counts, GitHub status, the shortcut, and the first task (`01_build.md` Build Phase 1) with the effort level to use (high). Then:
+- If setup ran from the master template: "This window is still in the template folder. Close it and start the game with the new 'Keep Building' shortcut" (if the shortcut was made) or "open <PROJECT> as the project and type: read instructions.md and continue" (if not).
 - Otherwise: "Good time to /clear now, then type: read instructions.md and continue".

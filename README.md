@@ -1,6 +1,6 @@
 # Roblox game template (for Claude Code + Roblox Studio)
 
-> **Disclaimer:** this guide is written for the **Claude Code terminal app (CLI)**, run from PowerShell. Using the Claude desktop app instead may not allow certain features this template relies on, such as the desktop shortcuts that start Claude with a named Remote Control session and type the first message for you, and some typed commands. The normal chat in the Claude app can't build the game at all (it can't run the scripts, saves or git).
+> **Disclaimer:** this guide is written for the **Claude Code terminal app (CLI)**, run from PowerShell. Using the Claude desktop app instead may not allow certain features this template relies on, such as the shortcut on your Windows desktop that starts Claude with a named Remote Control session and type the first message for you, and some typed commands. The normal chat in the Claude app can't build the game at all (it can't run the scripts, saves or git).
 
 A starter kit for making a Roblox game with Claude Code doing the building through the Roblox Studio MCP. Claude asks what genre you want (or rolls a random one you can reroll), invents an original game idea, writes a full step-by-step build plan for it, and then builds and tests the game in Studio task by task.
 
@@ -116,13 +116,11 @@ This folder stays as your master copy. Each new game is made as a copy of it in 
    - **Game idea:** Claude shows a short pitch card. Say yes, ask for a new idea, change the genre, or type what you'd like changed.
    - **Folder:** where to make the game (e.g. Documents\Roblox Games\YourGame). This template stays untouched, so you can reuse it for the next game.
    - **GitHub:** only asked if you did the GitHub extra above.
-   - **Shortcuts:** two desktop shortcuts:
-     - **<Game> - Claude**: opens Claude in the game folder.
-     - **<Game> - Claude (auto)**: the same, and types "read instructions.md and continue" for you.
-     Both start a Remote Control session named after the game, so you can follow along from the Claude app on your phone (optional: sign in to the Claude app with the same account and look for the session named after your game).
+   - **Shortcut:** Claude offers to put a **<Game> - Keep Building** shortcut on your Windows desktop. It opens Claude in the game folder and carries on with the next task (it types "read instructions.md and continue" for you). Want to ask Claude something or request a change instead? Press **Esc** once it starts and type your message.
+   - **Remote Control:** if you said yes to the shortcut, Claude also asks whether it should turn on Remote Control (the same as typing `/rc` in Claude). It lets you watch and control your Claude session from the Claude app on your phone, or from https://claude.ai/code on another computer. This is useful because building takes hours, and Claude often stops to ask a question or "Do you want to proceed?". With Remote Control you can answer from your phone instead of the build sitting and waiting until you're back at your PC. To use it, sign in to the Claude app with the same account and open the session named after your game. To get a phone notification when Claude needs an answer, type `/config` in Claude and turn on **Push when actions required**. Your PC must stay on with the Claude window open, because the work still happens there. Anyone signed in to your Claude account can control the session, so for extra safety turn on **Require trusted devices** in your Claude account settings. Said no? You can still turn it on for one session by typing `/rc` in Claude.
 6. When setup says it's done, close that PowerShell window (it's still in the template folder, not your game's folder).
-7. Double-click **<Game> - Claude (auto)** on your desktop. Claude starts **Build Phase 1**.
-   No shortcuts? Open your new **game folder** (the one you chose in step 5, not the template) in PowerShell the same way as step 2, type `claude`, press Enter, then type `read instructions.md and continue` and press Enter.
+7. Double-click **<Game> - Keep Building** on your desktop. Claude starts **Build Phase 1**.
+   No shortcut? Open your new **game folder** (the one you chose in step 5, not the template) in PowerShell the same way as step 2, type `claude`, press Enter, then type `read instructions.md and continue` and press Enter.
 
 ### The first session
 - Claude asks you to help with the first **Save to Roblox** (it creates the game on your Roblox account): check the owner and click **Create**.
@@ -133,11 +131,11 @@ This folder stays as your master copy. Each new game is made as a copy of it in 
 
 ### Every session after that
 1. Open Roblox Studio with your game: from Studio's start page (**Recent** or **My Games**), or **File > Open from Roblox**.
-2. Then double-click **<Game> - Claude (auto)** (or open the game folder in PowerShell, type `claude`, then `read instructions.md and continue`).
+2. Then double-click **<Game> - Keep Building** (or open the game folder in PowerShell, type `claude`, then `read instructions.md and continue`).
 3. When Claude finishes a task file or a topic, it stops and says "Good time to /clear now". Type `/clear` and press Enter. This wipes Claude's short-term memory of the conversation so the next task starts fresh (your game and its progress are saved, so nothing is lost). Then type `read instructions.md and continue`. Or close the window and use the shortcut again.
 
 ### Usage limits
-Claude Pro/Max plans have usage limits. If Claude says you've hit your limit, it tells you when it resets. Leave Studio and Claude open and, after the reset, type `continue`. If you closed everything, open Studio with the game and use the **(auto)** shortcut: Claude saves its place in git as it goes and picks up where it left off.
+Claude Pro/Max plans have usage limits. If Claude says you've hit your limit, it tells you when it resets. Leave Studio and Claude open and, after the reset, type `continue`. If you closed everything, open Studio with the game and use the **Keep Building** shortcut: Claude saves its place in git as it goes and picks up where it left off.
 
 ---
 
@@ -151,9 +149,9 @@ Claude Pro/Max plans have usage limits. If Claude says you've hit your limit, it
 | `mcp.bat` doesn't exist (the check says **False**) | Studio's MCP server isn't turned on yet (Part 1, step 4). |
 | PowerShell opened in the wrong folder | Close it and open the right folder in File Explorer first, then type `powershell` in its address bar. Setup must start in the template folder; game sessions must start in the game folder. |
 | Player data doesn't save in tests | The game must be saved to Roblox once, and **Enable Studio Access to API Services** must be on (Game Settings > Security). |
-| Claude stopped halfway | Start it again with the "(auto)" shortcut. It reads the last "HANDOFF" note in git and carries on. |
+| Claude stopped halfway | Start it again with the **Keep Building** shortcut. It reads the last "HANDOFF" note in git and carries on. |
 | Setup was interrupted | Delete the half-made game folder and run `read SETUP.md` in the template again. |
-| You want the shortcuts again | Open the game folder in PowerShell and run `powershell -ExecutionPolicy Bypass -File tools\make-shortcuts.ps1 -ProjectDir "<game folder>" -Name "<Game Name>"`, replacing `<game folder>` with the folder's full path (copy it from File Explorer's address bar) and `<Game Name>` with your game's name. Or just ask Claude to remake them. |
+| You want the shortcut again | Open the game folder in PowerShell and run `powershell -ExecutionPolicy Bypass -File tools\make-shortcuts.ps1 -ProjectDir "<game folder>" -Name "<Game Name>"`, replacing `<game folder>` with the folder's full path (copy it from File Explorer's address bar) and `<Game Name>` with your game's name. Add `-NoRemoteControl` at the end if you don't want Remote Control. Or just ask Claude to remake it. |
 
 ---
 

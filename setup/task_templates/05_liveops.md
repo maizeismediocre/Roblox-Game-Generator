@@ -48,7 +48,7 @@ Make the save system check the data version on load and run migration functions 
 A config module of on/off switches for features, so I can ship code early and switch it on later, or switch off something broken without a rollback. Every new system below must be behind its own flag.
 
 ## SYSTEM 3 — Admin commands
-Commands usable only by UserIds in the server-only admin config, to: give myself currency or items for testing, start/stop events, and send an announcement to all servers via MessagingService. Reject and log attempts by anyone else. Write the command list to `Admin commands.txt` in the repo so I can find it.
+Commands usable only by UserIds in the server-only admin config, to: give myself currency or items for testing, start/stop events, and send an announcement to all servers via MessagingService (the announcement text is filtered with TextService like any player-written text). Reject and log attempts by anyone else. Write the command list to `Admin commands.txt` in the repo so I can find it.
 
 ## SYSTEM 4 — Shutdown safety
 When I shut down servers to push an update, players see a friendly "Updating! Rejoin in a moment" message, and all data saves properly via BindToClose.

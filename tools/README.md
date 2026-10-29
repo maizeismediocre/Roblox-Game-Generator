@@ -1,6 +1,6 @@
 # tools
 
-- `make-shortcuts.ps1` - makes the two desktop shortcuts for this game ("<Game> - Claude" and "<Game> - Claude (auto)", both with a Remote Control session named after the game).
+- `make-shortcuts.ps1` - makes the desktop shortcut for this game ("<Game> - Keep Building", with a Remote Control session named after the game; add `-NoRemoteControl` to leave that out).
   Run: `powershell -ExecutionPolicy Bypass -File tools\make-shortcuts.ps1 -ProjectDir "<this folder>" -Name "<Game Name>"`
 
 - `store_edit.py` - turns a raw store-page screenshot (`store_page/<thumbnails|icon|passes>/<name>_raw.png`) into the finished image `<name>.png` in the same folder, then deletes the raw. Thumbnails: 16:9 crop, 1920x1080, optional text overlay. Icons/passes: square crop, 512x512, no text. Needs Python + Pillow.
