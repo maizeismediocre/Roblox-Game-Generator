@@ -1,5 +1,7 @@
 # Roblox game template (for Claude Code + Roblox Studio)
 
+> **Disclaimer:** this guide is written for the **Claude Code terminal app (CLI)**, run from PowerShell. Using the Claude desktop app instead may not allow certain features this template relies on, such as the desktop shortcuts that start Claude with a named Remote Control session and type the first message for you, and some typed commands. The normal chat in the Claude app can't build the game at all (it can't run the scripts, saves or git).
+
 A starter kit for making a Roblox game with Claude Code doing the building through the Roblox Studio MCP. Claude asks what genre you want (or rolls a random one you can reroll), invents an original game idea, writes a full step-by-step build plan for it, and then builds and tests the game in Studio task by task.
 
 You don't need to know how to code. You do need a Windows PC, a Roblox account and a paid Claude plan, and about 30 minutes for the one-time setup below. Do the steps **in order**: some of them need the one before.
@@ -69,7 +71,7 @@ Useful to know: you **start** Claude by typing `claude` in PowerShell, and **clo
 2. Open the **Assistant** window: click the **Assistant** button in Studio's toolbar (near the top right), or find **Assistant** in the **Window** / **View** menu.
 3. In the Assistant window, click the **...** (three dots) button (top right), then click **Settings** (in some Studio versions it's called **Manage MCP Servers**). This opens the **Assistant Settings** window.
 4. Click **MCP Servers** on the left (skip this if it's already showing).
-5. Turn on **Enable Studio as MCP server**, then close the Assistant Settings window. Skip the **Quick connect** dropdown (don't paste its Claude Code command anywhere): the template's `.mcp.json` file already connects Claude Code to Studio. (Only if you use the Claude desktop app instead of PowerShell, see [Using the Claude desktop app](#using-the-claude-desktop-app-instead-of-the-terminal).)
+5. Turn on **Enable Studio as MCP server**, then close the Assistant Settings window. Skip the **Quick connect** dropdown (don't paste its Claude Code command anywhere): the template's `.mcp.json` file already connects Claude Code to Studio.
 6. Check it worked: in a PowerShell window, paste this and press Enter. It should say **True**:
    ```
    Test-Path "$env:LOCALAPPDATA\Roblox\mcp.bat"
@@ -114,7 +116,7 @@ This folder stays as your master copy. Each new game is made as a copy of it in 
    - **Game idea:** Claude shows a short pitch card. Say yes, ask for a new idea, change the genre, or type what you'd like changed.
    - **Folder:** where to make the game (e.g. Documents\Roblox Games\YourGame). This template stays untouched, so you can reuse it for the next game.
    - **GitHub:** only asked if you did the GitHub extra above.
-   - **Shortcuts:** only offered when Claude is running in PowerShell (not in the desktop app). Two desktop shortcuts:
+   - **Shortcuts:** two desktop shortcuts:
      - **<Game> - Claude**: opens Claude in the game folder.
      - **<Game> - Claude (auto)**: the same, and types "read instructions.md and continue" for you.
      Both start a Remote Control session named after the game, so you can follow along from the Claude app on your phone (optional: sign in to the Claude app with the same account and look for the session named after your game).
@@ -136,9 +138,6 @@ This folder stays as your master copy. Each new game is made as a copy of it in 
 
 ### Usage limits
 Claude Pro/Max plans have usage limits. If Claude says you've hit your limit, it tells you when it resets. Leave Studio and Claude open and, after the reset, type `continue`. If you closed everything, open Studio with the game and use the **(auto)** shortcut: Claude saves its place in git as it goes and picks up where it left off.
-
-### Using the Claude desktop app instead of the terminal
-The Code part of the Claude desktop app works too: open the template folder as the project and type `read SETUP.md`; later open the game folder and type `read instructions.md and continue`. No desktop shortcuts are made there. The app should pick up the template's `.mcp.json` by itself. If the Studio tools don't show up (ask Claude "can you see the Roblox Studio tools?"), connect it from Studio once: **Assistant > ... > Settings > MCP Servers**, open the **Quick connect** dropdown, click **Claude Desktop** and do what it shows (it only appears once the Claude app is installed; if it's missing, restart Studio), then fully quit the Claude app (right-click its icon in the taskbar's hidden-icons area > **Quit**) and open it again. Still nothing? Click **Claude Code** in the same dropdown, copy the command it shows, paste it into PowerShell opened in your game folder and press Enter, then restart the app again (see https://create.roblox.com/docs/studio/mcp). The normal chat part of the desktop app can't do this (it can't run the scripts, saves or git).
 
 ---
 
