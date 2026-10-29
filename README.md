@@ -79,7 +79,7 @@ Useful to know: you **start** Claude by typing `claude` in PowerShell, and **clo
 Roblox sometimes moves menus. If yours look different, follow the current steps in Roblox's guide (link above). You only do this once: after this, the template's `.mcp.json` file connects Claude to Studio by itself every time you start Claude in a game folder (as long as Studio is open).
 
 ### 5. Download this template
-1. Go to https://github.com/maizeismediocre/Roblox-Game-Generator, click the green **Code** button, then **Download ZIP**.
+1. Go to https://github.com/maizeismediocre/Roblox-Game-Generator, click the green **Code** button, then **Download ZIP**. Only use a copy from this link. The template's settings let Claude use Studio without asking first, so a changed copy from somewhere else (a video, a Discord link, a "fixed" version) could run things on your PC that you never agreed to.
 2. Open your **Downloads** folder, right-click the ZIP file, choose **Extract All...** and pick a place you'll find again, e.g. your **Documents** folder.
 3. Open the extracted folder. You may need to go one folder deeper: the right folder is the one that contains `README.md`, `SETUP.md` and `CLAUDE.md`. This is the **template folder**; remember where it is.
    (If you know git: `git clone https://github.com/maizeismediocre/Roblox-Game-Generator.git` does the same.)
@@ -97,7 +97,7 @@ This folder stays as your master copy. Each new game is made as a copy of it in 
   winget install --id GitHub.cli -e
   gh auth login
   ```
-  Then pick GitHub.com, HTTPS, and "Login with a web browser". If this is set up, Claude offers to make a private GitHub repo for each new game.
+  Then pick GitHub.com, HTTPS, and "Login with a web browser". If this is set up, Claude offers to make a private GitHub repo for each new game. Keep it private: it holds a full copy of your game, including the server scripts and the admin list, and exploiters can use those to look for ways to cheat.
 
 ---
 
@@ -106,12 +106,12 @@ This folder stays as your master copy. Each new game is made as a copy of it in 
 1. Open **Roblox Studio** with a new place: **File > New > Baseplate**. Leave it open. (Always open Studio *before* starting Claude, so Claude can connect to it.)
 2. Open the template folder in PowerShell: in File Explorer, open the **template folder** (the one with `README.md` and `SETUP.md` in it, from Part 1 step 5), click the address bar, type `powershell` and press Enter. The prompt should end with the template folder's name.
 3. Type `claude` and press Enter. The first time in this folder, Claude may ask:
-   - **Do you trust the files in this folder?** Choose **Yes**.
-   - **Allow the Roblox_Studio MCP server?** Choose **Yes** (or "use this and all future MCP servers").
+   - **Do you trust the files in this folder?** Choose **Yes** (only for a template you downloaded from the link in Part 1, step 5).
+   - **Allow the Roblox_Studio MCP server?** Choose **Yes**. Don't pick "use this and all future MCP servers": that would also allow any server added to the folder later without asking you.
 4. Type `read SETUP.md` and press Enter.
 5. Answer Claude's questions. They appear as a list of choices: use the **arrow keys** and **Enter** to pick one, or choose **Other** / just type to write your own answer.
 
-   Claude will also sometimes ask **"Do you want to proceed?"** before running a command or changing a file. Pick **Yes**, or **Yes, and don't ask again** for that kind of command, so it asks less often.
+   Claude will also sometimes ask **"Do you want to proceed?"** before running a command or changing a file. Pick **Yes**, or **Yes, and don't ask again** for that kind of command, so it asks less often. Pick plain **Yes** (or **No**, then ask Claude what it's for) when the command installs something, deletes files outside the game folder, or is one you don't recognise. "Don't ask again" stays on for that whole kind of command in future sessions too.
    - **Genre:** pick **Random** (reroll as often as you like), choose from the list, or type your own idea.
    - **Game idea:** Claude shows a short pitch card. Say yes, ask for a new idea, change the genre, or type what you'd like changed.
    - **Folder:** where to make the game (e.g. Documents\Roblox Games\YourGame). This template stays untouched, so you can reuse it for the next game.
@@ -126,6 +126,8 @@ This folder stays as your master copy. Each new game is made as a copy of it in 
 - Claude asks you to help with the first **Save to Roblox** (it creates the game on your Roblox account): check the owner and click **Create**.
 - It then asks you to turn on **Enable Studio Access to API Services** (needed for saving player data in tests): in Studio open **Game Settings** (in the **File** menu, or the **Game Settings** button on the **Home** tab), click **Security**, turn on **Enable Studio Access to API Services**, and click **Save**.
 - After that Claude works on its own: it builds, tests, saves and moves on. You can watch, but don't click around in Studio while it's working, because it uses Studio too.
+- **Hands off while Claude saves:** after every finished item Claude saves the game (Save to Roblox, then Save to File). To do this it moves your **real mouse and keyboard**, brings Studio to the front, and clicks through the menus. You can't use your PC while it does this: if you move the mouse, type, or switch windows, its clicks can land in the wrong place, and the save fails or something else gets clicked. Claude does the same for 2-player tests and model pictures. Saves happen often and without warning, so it's safest to leave the PC alone while Claude is building. If a save goes wrong because you used the PC, tell Claude and it will save again.
+- Claude sometimes takes pictures of the **whole screen** to check Studio, so keep private things (emails, passwords, bank pages, chats) closed or minimised while it works.
 - **Effort level:** before each task Claude says which effort level suits it. To change it, type `/effort high` (or `/effort medium`) and press Enter. Higher effort gives better 3D models and art but uses more of your Claude plan.
 - **To stop Claude** in the middle of something, press **Esc**. Type a message to tell it what to do next.
 
@@ -162,7 +164,7 @@ Claude Pro/Max plans have usage limits. If Claude says you've hit your limit, it
 | `setup/` | Genre list, the task-file and instructions templates, the placeholder filler |
 | `CLAUDE.md` | The rules Claude follows in every session |
 | `.mcp.json` | Connects Claude to Roblox Studio's MCP server automatically |
-| `.claude/settings.json` | Auto-approves the Studio MCP server and its tools; reminds Claude where it was after `/clear` |
+| `.claude/settings.json` | Auto-approves the Studio MCP server and its tools (except inserting Creator Store models, which asks you first); reminds Claude where it was after `/clear` |
 | `.claude/skills/` | Step-by-step skills: save-game, model-qa, new-character, seasonal-event, model-photos, log-phase, handoff, health-check, start-2p-test, screen-capture, player-text, add-asset |
 | `studio_tools/` | Studio tool modules (ModelKit: blocky model builder + quality checkers; SceneryScan) installed into the game in Build Phase 1 |
 | `tools/` | Picture tools (model cut-outs, store-page image editing, a font) and `make-shortcuts.ps1` |

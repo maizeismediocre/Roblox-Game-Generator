@@ -1,2 +1,5 @@
 *.rbxl.lock
 __pycache__/
+# personal Claude permissions ("don't ask again" choices) and any secrets never go in git
+.claude/settings.local.json
+.env

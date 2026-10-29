@@ -1,7 +1,8 @@
 {
   "enabledMcpjsonServers": ["Roblox_Studio"],
   "permissions": {
-    "allow": ["mcp__Roblox_Studio"]
+    "allow": ["mcp__Roblox_Studio"],
+    "ask": ["mcp__Roblox_Studio__insert_asset"]
   },
   "hooks": {
     "SessionStart": [
