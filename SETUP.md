@@ -42,7 +42,7 @@ Write ONE original game idea for the chosen genre. It must be:
 - **Better with friends, fine alone:** at least one real co-op or social feature (helping, trading, visiting, teaming up), never needed to progress.
 - **Friendly:** for players 9+; cute or funny, not gory; no gambling mechanics; no real-world religion, politics or brands.
 - **Buildable by Claude through the Studio MCP:** players are normal Roblox avatars; every model is built from plain parts in a chunky block style (no custom meshes, no Blender, no hand-made animations); one place with several areas (no extra places); mobile-friendly controls (tap, joystick, a few big buttons). An MVP that fits in 6-9 build phases.
-- **Fair monetisation:** game passes and developer products for specific, known things (cosmetics, convenience, boosts); nothing pay-to-win, no paid random items (no paid eggs/crates/gacha).
+- **Fair monetisation:** game passes and developer products for specific, known things (cosmetics, convenience, boosts that don't change random odds); nothing pay-to-win, no paid random items (no paid eggs/crates/gacha, and no paid luck boosts: see "Paid random items" in CLAUDE.md).
 
 Before showing it: web-search the game name (`"<Name>" Roblox`, `"<Name>" game`) and every named creature/item in the pitch; swap any name that's taken or is slang.
 
