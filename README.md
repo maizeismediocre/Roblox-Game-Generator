@@ -145,7 +145,10 @@ Already have an older Python? Install 3.14 as well; the old one can stay. `py` u
 ### Every session after that
 1. Open Roblox Studio with your game: from Studio's start page (**Recent** or **My Games**), or **File > Open from Roblox**.
 2. Then double-click **<Game> - Keep Building** (or open the game folder in PowerShell, type `claude`, then `read instructions.md and continue`).
-3. When Claude finishes a task file or a topic, it stops and says "Good time to /clear now". Type `/clear` and press Enter. This wipes Claude's short-term memory of the conversation so the next task starts fresh (your game and its progress are saved, so nothing is lost). Then type `read instructions.md and continue`. Or close the window and use the shortcut again.
+3. When Claude finishes a task file or a topic, it stops and says "Good time to /clear now". Type `/clear` and press Enter. This wipes Claude's short-term memory of the conversation so the next task starts fresh (your game and its progress are saved, so nothing is lost). Then type `continue` and press Enter.
+   - You only need the one word because of a hook in the template (`.claude/settings.json`): straight after `/clear`, it tells Claude to read `instructions.md`, check for unfinished work and start the next task. It does the same when Claude squeezes a long conversation down by itself.
+   - Claude can't start on its own after `/clear`: it always waits for you to type something. Anything short works (`continue`, `go`, `carry on`).
+   - Or close the window and use the shortcut again.
 
 ### Usage limits
 Claude Pro/Max plans have usage limits. If Claude says you've hit your limit, it tells you when it resets. Leave Studio and Claude open and, after the reset, type `continue`. If you closed everything, open Studio with the game and use the **Keep Building** shortcut: Claude saves its place in git as it goes and picks up where it left off.
@@ -176,7 +179,7 @@ Claude Pro/Max plans have usage limits. If Claude says you've hit your limit, it
 | `setup/` | Genre list, the genre guide (`genre_guide.md`: one profile per genre, with `check_genres.py` to check the two files agree), the task-file and instructions templates, the placeholder filler |
 | `CLAUDE.md` | The rules Claude follows in every session |
 | `.mcp.json` | Connects Claude to Roblox Studio's MCP server automatically |
-| `.claude/settings.json` | Auto-approves the Studio MCP server and its tools (except inserting Creator Store models, which asks you first), plus the template's own everyday commands: git status/log/diff/add/commit/push, the Python tools in `tools/`, and the script that clicks, types and takes screenshots for saves and tests (it refuses to click or type in anything except Roblox Studio). Blocks force-pushes. Reminds Claude where it was after `/clear` |
+| `.claude/settings.json` | Auto-approves the Studio MCP server and its tools (except inserting Creator Store models, which asks you first), plus the template's own everyday commands: git status/log/diff/add/commit/push, the Python tools in `tools/`, and the script that clicks, types and takes screenshots for saves and tests (it refuses to click or type in anything except Roblox Studio). Blocks force-pushes. Has a hook that reminds Claude where it was after `/clear` (and after it compacts a long conversation), so typing `continue` is enough |
 | `.claude/skills/` | Step-by-step skills: save-game, model-qa, new-character, seasonal-event, model-photos, log-phase, handoff, health-check, start-2p-test, screen-capture, player-text, add-asset |
 | `studio_tools/` | Studio tool modules (ModelKit: blocky model builder + quality checkers; SceneryScan) installed into the game in Build Phase 1 |
 | `tools/` | Picture tools (model cut-outs, store-page image editing, a font), `export_scripts.py` (copies the game's scripts into `src/` as text), `cloud_save_time.py` (checks a save reached Roblox) and `make-shortcuts.ps1` |

@@ -31,7 +31,11 @@ The place must exist on Roblox before DataStores work in Studio tests.
 2. Screenshot, then click **File** in the top-left of the menu bar.
 3. Screenshot, then click **Save to Roblox**. Do NOT click "Publish to Roblox": publishing makes the change live for players.
 4. Screenshot. If a dialog appears (e.g. about collaborative editing or unpublished scripts), read it and choose the option that saves. If you're unsure, stop and ask the user.
-5. **Prove the cloud save landed (no clicks):** in Bash, from the project folder, `py -I tools/cloud_save_time.py {{PLACE_ID}}`. It prints the last cloud save time (UTC) and how many seconds ago that was: it must be under about 120. If it is older, the click missed or the save failed: screenshot, then save again. Never report a cloud save without this check. (If it prints CHECK FAILED because the place is private, check the window title and Output for errors instead, and note that here.)
+5. **Prove the cloud save landed (no clicks):** in Bash, from the project folder, `py -I tools/cloud_save_time.py {{PLACE_ID}}`. It prints the last cloud save time (UTC) and how many seconds ago that was, then a `STUDIO SAID:` line with what Studio's log recorded for the last Save to Roblox.
+   - Saved: the time is under about 120 seconds ago.
+   - Nothing to save: the time is old, but `STUDIO SAID` (with a time from the last minute) is "No changes to the place detected. Did not save." Studio skips the upload when nothing changed since the last cloud save, so the cloud copy is already up to date. Count it as saved and say so in the report. Never change the place just to force a save.
+   - Failed: the time is old and `STUDIO SAID` is missing, older than the click, or anything else. The click missed or the save failed: screenshot, then save again.
+   Never report a cloud save without this check. (Proven on 2026-11-10: clicking Save to Roblox on a linked place with no changes gave the "No changes" line and no dialog.) (If it prints CHECK FAILED because the place is private, check the window title and Output for errors instead, and note that here.)
 
 ## 2. Save to File (overwrite the backup)
 **Fast way (try first):** once the backup has been "Save to File As"'d in this Studio session, File > **Save to File** overwrites it straight away with no dialog, and the window title stays the cloud place. Then check the backup's modified time (step 4); if it did NOT change (Studio was restarted, or a dialog opened), use the dialog way.
