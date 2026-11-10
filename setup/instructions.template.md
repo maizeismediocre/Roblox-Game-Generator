@@ -9,11 +9,18 @@ You are helping me build the Roblox game "{{GAME_NAME}}" in my open Roblox Studi
   2. the NEXT item/phase is UNRELATED to the one just finished (different system or topic, e.g. sounds -> UI, art -> animation code), so I can clear the context window before it.
   When you stop: send me a push notification (PushNotification tool) with a one-line summary and what is next, give the progress update, then wait for me. Do not start the next item until I say so.
 - Related items (same system, building on each other) go straight on without stopping.
-- These rules override the task files wherever they say "STOP", "wait for me", "wait for my approval" or "remind me to save".
+- These rules override the task files wherever they say "STOP", "wait for me", "wait for my approval" or "remind me to save", EXCEPT at the human checks below.
 - Instead of me testing, YOU test every item properly (see "Doing the task") before ticking it.
-- At approval checkpoints (plans, proposals, art reviews, etc.), make the sensible choice yourself and record it in the progress log under the section's decisions, so I can review and change it later.
+- At approval checkpoints (plans, proposals, art reviews, etc.), make the sensible choice yourself and record it in the progress log under the section's decisions, so I can review and change it later. A human check is not an approval checkpoint.
 - Otherwise only stop early when you are genuinely blocked on something only I can do or give you (see "If something goes wrong").
-- Before each task, tell me which effort level suits it (high for models, art and QA; medium for plain code and text).
+- When you stop, tell me which effort level suits the next task (high for models, art and QA; medium for plain code and text), so I can set it with `/effort` before I say continue.
+
+## Human checks (you always stop and wait for me here)
+Items marked "(HUMAN CHECK)" in a task file need a real person, because you can't judge them for me:
+1. The fun check in 01_build.md: I play the core loop and say whether it is fun. If the game has feel checks (also in 01_build.md), I try the controls and you tune them from my answers.
+2. QA Step 7 in 06_quality_qa.md: I play the finished game and say whether it is ready for pictures.
+3. Launch Steps 3 and 4 in 08_launch.md: I publish the game, and a week later I bring you the player numbers.
+At each one: finish everything the item asks you to prepare, save, commit, notify me, tell me click by click what to do, then STOP. Never tick a human check yourself and never work past it, even when the other rules say to keep going. If I'm away, the build waits.
 
 ## Checkbox meanings
 - "- [ ]" = not started
@@ -22,11 +29,11 @@ You are helping me build the Roblox game "{{GAME_NAME}}" in my open Roblox Studi
 
 ## Finding the next task
 1. Don't open every task file: grep just the STATUS lines (`grep -n STATUS 0*.md`) of
-   01_build.md, 02_economy.md, 03_art.md, 04_polish.md, 05_liveops.md, 06_quality_qa.md, 07_store_page.md
-   (06 = full quality QA pass: it must be COMPLETE before any store-page pictures)
+   01_build.md, 02_economy.md, 03_art.md, 04_polish.md, 05_liveops.md, 06_quality_qa.md, 07_store_page.md, 08_launch.md, 09_weekly_rotation.md
+   (06 = full quality QA pass: it must be COMPLETE before any store-page pictures. 09 is built after launch, and only if I chose to in Launch Step 4.)
 2. Skip any file whose STATUS line says COMPLETE (never read it); read only the first file that isn't.
 3. In the first file that is not complete, find the first "- [ ]" item. That is the next task. Items marked "- [~]" don't block you; just mention them in your progress updates.
-4. Never run anything in a manual/ folder unless I explicitly ask for it by name.
+4. Before starting 09_weekly_rotation.md, read my decision from Launch Step 4 in the progress log. If I chose to wait, don't start it: tell me there is nothing left to build until I decide, and stop.
 
 ## Handoff check (first thing every session)
 - Run `git log -5` and read the last commits' descriptions. If any has a "HANDOFF" section, finish/check those items before anything else and tell me what it said (the `handoff` skill).
@@ -40,7 +47,7 @@ You are helping me build the Roblox game "{{GAME_NAME}}" in my open Roblox Studi
 
 ## Start-of-session health check - only when I ask
 Don't run the full health check at the start of a session; go straight from the handoff check to the next task. Run it (the `health-check` skill) only if I ask for it, or after a big change that touched the core loop. It:
-- reads the in-game progress log at ServerStorage/DevNotes/Progress,
+- reads the progress log at `devnotes/Progress.md`,
 - checks the items ticked in the task files really exist in the game (if the checklists, the log and the game disagree, STOP and explain; don't guess or rebuild without my approval),
 - smoke-tests the core loop as far as it exists (including leave and rejoin to confirm data saved) and checks the Output window.
   - If saving fails because Studio has no DataStore access, tell me to turn on "Enable Studio Access to API Services" in Game Settings > Security (the game must be saved to Roblox first), and wait.
@@ -53,14 +60,14 @@ Don't run the full health check at the start of a session; go straight from the 
    - Re-run the core loop smoke test (the `health-check` scripts, once they exist), so new work hasn't broken old work.
    - Check the Output window and fix any errors or warnings, then test again.
    - If a test needs 2 or more players, use the `start-2p-test` skill to start it yourself.
-4. Update the in-game progress log as the task file describes, using the `log-phase` skill.
+4. Update the progress log (`devnotes/Progress.md`) as the task file describes, using the `log-phase` skill.
 
 ## Finishing the task
 5. Mark the item "- [x]" (or "- [~]" if part of it needs me). If it is the file's first started item, change STATUS to IN PROGRESS. If every item is "- [x]", change STATUS to COMPLETE.
 6. Only ever edit the STATUS line and checkboxes in task files. Never change, delete or rewrite the task instructions themselves (unless I ask you to add or change an item).
 7. If the item added a feature players can see, add it to `store_page/description.txt` (the `player-text` skill).
-8. Save the game with the `save-game` skill (Save to Roblox + Save to File over "{{BACKUP_FILE}}").
-9. Commit to git: stage the changed files (task files, backup .rbxl, skills, etc.) and commit with a short message such as "Build Phase 3: Shops". Do NOT add a Co-Authored-By line or any other AI attribution. Then push it (`git push`) if the repo has a remote. If the push fails, tell me why and carry on; never force-push.
+8. Save the game with the `save-game` skill (Save to Roblox + Save to File over "{{BACKUP_FILE}}" + the script copies in `src/`).
+9. Commit to git: stage the changed files (task files, `devnotes/`, `src/`, skills, etc.) and commit with a short message such as "Build Phase 3: Shops". The backup .rbxl is big and git keeps every version of it, so stage it only in the commit before a STOP and in a HANDOFF commit; the commits in between leave it out. Do NOT add a Co-Authored-By line or any other AI attribution. Then push it (`git push`) if the repo has a remote. If the push fails, tell me why and carry on; never force-push.
 10. Give me a short progress update: what you built, what you tested and the results, any decisions you made at approval checkpoints, and anything that needs me. Then go straight on to the next item - unless that finished the task file or the next item is unrelated: then notify me and STOP (see "Keep going, but stop at task-file ends and topic changes").
 
 ## If something goes wrong

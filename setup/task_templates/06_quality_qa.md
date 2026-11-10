@@ -8,7 +8,7 @@ STATUS: NOT STARTED
 - [ ] QA Step 4 — Sounds and music
 - [ ] QA Step 5 — Full gameplay run-through
 - [ ] QA Step 6 — Data, live-ops and safety
-- [ ] QA Step 7 — Fix list and your sign-off
+- [ ] QA Step 7 — Fix list and your sign-off (HUMAN CHECK)
 
 ---
 
@@ -20,10 +20,10 @@ Rules for every step:
 - Prove things in code first; photos only where a look needs judging.
 
 ## PROGRESS LOG AND SAVING
-Log each step in DevNotes/Progress under "QUALITY QA" (what was checked, how, what was found, what was fixed, what still needs me) and the full write-up in the archive (`log-phase`). Save with `save-game` and commit after each step.
+Log each step in `devnotes/Progress.md` under "QUALITY QA" (what was checked, how, what was found, what was fixed, what still needs me) and the full write-up in the archive (`log-phase`). Save with `save-game` and commit after each step.
 
 ## QA STEP 1 — Main model quality audit
-Every main model (<!-- GENERATE: what this game's main models are, e.g. "every creature species: always, rotating, event and seasonal" or "every vehicle and racer" -->): measure it against the Art Phase A models (body size, eye size, part count per rarity), build them in rows of ~10 next to 2-3 of the best ones and photograph; check limb counts, blink, animation, hover/flap for flyers, its sound, every place it is shown (UI pictures not cropped, silhouettes when undiscovered) and every variant look. Rebuild any that looks worse than the best ones.
+Every main model (<!-- GENERATE: what this game's main models are, e.g. "every creature species, including event ones" or "every vehicle and racer" -->): measure it against the Art Phase A models (body size, eye size, part count per rarity), build them in rows of ~10 next to 2-3 of the best ones and photograph; check limb counts, blink, animation, hover/flap for flyers, its sound, every place it is shown (UI pictures not cropped, silhouettes when undiscovered) and every variant look. Rebuild any that looks worse than the best ones.
 - **Rude-readings check:** look at every model from the front, sides, back and above and REDESIGN any that could read as rude or as a symbol (upright pink/skin-coloured tubes, nubs or knobs; two round lobes that read as a bottom; anything phallic; zig-zag "S"/lightning shapes; crosses or 4/6/8-point stars). When unsure, redesign it.
 - **Anatomy + feet:** limbs match the real animal/thing (4-legged = 4 in total; birds 2 legs + 2 wings; insects 6); every foot visible from the front or side, under the body (never wider than the torso), touching the ground. Prove it in code (each Leg/Foot/Paw: bottom height and position under the Body) and with a side photo.
 - **Faces:** every face has a mouth (or a beak/snout that is the mouth); furry animals also a nose; eyes the same size and level, shine on the same side as the others, both visible from a 3/4 view.
@@ -47,10 +47,10 @@ Open every screen, panel, popup and notification on PC and in the Device Simulat
 Every sound slot plays at the right moment and loudness, every main model/character has its own fitting sound (if the game gives them voices), every area has its own music. Licences recorded (`add-asset`). List anything that needs my ears as "- [~] needs you".
 
 ## QA STEP 5 — Full gameplay run-through
-As a brand-new player: <!-- GENERATE: the full run-through for this game, e.g. "tutorial -> core loop x3 -> first upgrade -> every area unlock -> variants -> daily reward -> weekly challenges and rotation -> a forced live event (and holiday) -> rejoin" -->. Then a 2-player test of every co-op/social feature (`start-2p-test`). The Output stays clean and the frame rate is smooth in the busiest places (count parts, particles and lights).
+As a brand-new player: <!-- GENERATE: the full run-through for this game, e.g. "tutorial -> core loop x3 -> first upgrade -> every area unlock -> variants -> daily reward -> a forced event -> rejoin" -->. Run every GENRE CHECKLIST test from 01_build.md again: all PASS, and the game still plays like its genre from the first minute. Then a 2-player test of every co-op/social feature (`start-2p-test`). The Output stays clean and the frame rate is smooth in the busiest places (count parts, particles and lights).
 
 ## QA STEP 6 — Data, live-ops and safety
-DataStore saving and rejoin, data migration, shutdown safety, admin commands, feature flags, the weekly rotation (and seasonal calendar) for the next 12 months, every remote's validation (try bad values from the client), text filtering (search every script for where player-written text is shown to others and confirm each goes through TextService filtering on the server, failing safe to nothing), no outside scripts (search the whole game for scripts the template didn't write, e.g. ones that came inside a Creator Store model, and any `require(` that isn't given a script path, `loadstring`, `getfenv`, `InsertService:LoadAsset` or `PackageLink`), and every DevTools test suite PASS.
+DataStore saving and rejoin, SessionLockTest (all four checks PASS), data migration, shutdown safety, admin commands, feature flags, the event scheduler (a faked date turns an event on and off), every remote's validation (try bad values from the client), text filtering (search every script for where player-written text is shown to others and confirm each goes through TextService filtering on the server, failing safe to nothing), no outside scripts (search the whole game for scripts the template didn't write, e.g. ones that came inside a Creator Store model, and any `require(` that isn't given a script path, `loadstring`, `getfenv`, `InsertService:LoadAsset` or `PackageLink`), and every DevTools test suite PASS.
 
-## QA STEP 7 — Fix list and your sign-off
-Put every remaining issue in one list with what was fixed and what is left. Then STOP: I play the game myself and say whether it's ready for pictures. Tick this step "- [x]" only after I approve.
+## QA STEP 7 — Fix list and your sign-off (HUMAN CHECK)
+Put every remaining issue in one list with what was fixed and what is left. Then STOP: I play the game myself and say whether it's ready for pictures. This is one of the few places where you wait for me (instructions.md, "Human checks"): do not decide it yourself. Tick this step "- [x]" only after I approve.

@@ -12,7 +12,7 @@ You are working in my open Roblox Studio session for "{{GAME_NAME}}" through the
 For each scene step: build or arrange the scene, position the camera for a strong 16:9 shot, hide all UI except where noted, and make the lighting look its best. Take the picture yourself where you can (the `screen-capture` skill; a full-screen grab with `.claude/skills/start-2p-test/scripts/studio-input.ps1 -Action shot`); only if that can't give a clean full-size image, tell me exactly how to take it. Put all staging objects in a Workspace folder called "ThumbnailStaging", and keep a list in the progress log of anything you change (lighting, camera, UI visibility) so it can be restored.
 
 ## PROGRESS LOG AND SAVING
-- Add or update a "STORE PAGE" section in ServerStorage/DevNotes/Progress (never remove or change other sections) with which steps are done and everything changed for staging (`log-phase`).
+- Add or update a "STORE PAGE" section in `devnotes/Progress.md` (never remove or change other sections) with which steps are done and everything changed for staging (`log-phase`).
 - At the end of each step, save with `save-game`, then commit + push.
 
 ## WHERE THE IMAGES GO
@@ -30,7 +30,7 @@ store_page/
 - <name> = the pass/product's internal Id from the monetisation config, lower_snake_case.
 
 ## STORE STEP 1 — Final description
-Read the whole game (and the progress log) and finish `store_page/description.txt` (the `player-text` skill): under 1,000 characters, short sections, only features that exist and work, the automatic weekly rotation, no numbers. Keep the credits line (CC BY) at the end and the TITLE OPTIONS block below it (3 short titles under 50 characters). Approval checkpoint: pick the best title yourself and record it. (No Studio changes in this step.)
+Read the whole game (and the progress log) and finish `store_page/description.txt` (the `player-text` skill): under 1,000 characters, short sections, only features that exist and work, no numbers. The weekly rotation is not built yet, so leave it out (09_weekly_rotation.md adds it later). Keep the credits line (CC BY) at the end and the TITLE OPTIONS block below it (3 short titles under 50 characters). Approval checkpoint: pick the best title yourself and record it. (No Studio changes in this step.)
 
 <!-- GENERATE: 5-6 scene steps for THIS game, each "## STORE STEP N — Scene: <name>" with 1-3 sentences describing a dynamic, honest shot of a real feature: e.g. friends doing the co-op feature together (funny moment), the best-looking base/shop/home fully upgraded, the rarest collectible close up with its glow, a line-up of variants, a wide shot of all areas/progression, a live event. -->
 

@@ -1,8 +1,65 @@
 {
   "enabledMcpjsonServers": ["Roblox_Studio"],
   "permissions": {
-    "allow": ["mcp__Roblox_Studio"],
-    "ask": ["mcp__Roblox_Studio__insert_asset"]
+    "allow": [
+      "mcp__Roblox_Studio",
+      "Bash(git status *)",
+      "Bash(git log *)",
+      "Bash(git diff *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push)",
+      "Bash(git push origin main)",
+      "Bash(git push -u origin main)",
+      "Bash(git remote)",
+      "Bash(git remote -v)",
+      "Bash(py -I tools/export_scripts.py *)",
+      "Bash(py -I tools/cloud_save_time.py *)",
+      "Bash(py -I tools/store_edit.py *)",
+      "Bash(py tools/store_edit.py *)",
+      "Bash(py -I tools/icons/cutout.py *)",
+      "Bash(py -I tools/icons/netmatte.py *)",
+      "Bash(py -I tools/icons/netfinish.py *)",
+      "Bash(py -I tools/icons/finish.py *)",
+      "Bash(py -I tools/icons/colour.py *)",
+      "Bash(py -I tools/icons/sheet.py *)",
+      "PowerShell(git status *)",
+      "PowerShell(git log *)",
+      "PowerShell(git diff *)",
+      "PowerShell(git add *)",
+      "PowerShell(git commit *)",
+      "PowerShell(git push)",
+      "PowerShell(git push origin main)",
+      "PowerShell(git push -u origin main)",
+      "PowerShell(git remote)",
+      "PowerShell(git remote -v)",
+      "PowerShell(py -I tools/export_scripts.py *)",
+      "PowerShell(py -I tools/cloud_save_time.py *)",
+      "PowerShell(py -I tools/store_edit.py *)",
+      "PowerShell(py tools/store_edit.py *)",
+      "PowerShell(py -I tools/icons/cutout.py *)",
+      "PowerShell(py -I tools/icons/netmatte.py *)",
+      "PowerShell(py -I tools/icons/netfinish.py *)",
+      "PowerShell(py -I tools/icons/finish.py *)",
+      "PowerShell(py -I tools/icons/colour.py *)",
+      "PowerShell(py -I tools/icons/sheet.py *)",
+      "PowerShell(powershell -ExecutionPolicy Bypass -File .claude/skills/start-2p-test/scripts/studio-input.ps1 *)",
+      "PowerShell(powershell -ExecutionPolicy Bypass -File tools/icons/shots.ps1 *)"
+    ],
+    "ask": [
+      "mcp__Roblox_Studio__insert_asset",
+      "mcp__Roblox_Studio__open_cloud_invoke"
+    ],
+    "deny": [
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git push * --force*)",
+      "Bash(git push * -f*)",
+      "PowerShell(git push --force*)",
+      "PowerShell(git push -f*)",
+      "PowerShell(git push * --force*)",
+      "PowerShell(git push * -f*)"
+    ]
   },
   "hooks": {
     "SessionStart": [
@@ -11,7 +68,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "printf %s \"{\\\"hookSpecificOutput\\\":{\\\"hookEventName\\\":\\\"SessionStart\\\",\\\"additionalContext\\\":\\\"Context was just cleared. If SETUP.md exists in the project folder, read SETUP.md and carry on with the setup. Otherwise read instructions.md and continue the game work: git log -5 HANDOFF check first, then the next task (no health check unless the user asks).\\\"}}\""
+            "command": "printf %s \"{\\\"hookSpecificOutput\\\":{\\\"hookEventName\\\":\\\"SessionStart\\\",\\\"additionalContext\\\":\\\"Context was just cleared. If SETUP.md exists in the project folder, read SETUP.md and carry on with the setup. Otherwise read instructions.md and continue the game work: git log -5 HANDOFF check first, then the next task (no health check unless the user asks). If the next item is marked HUMAN CHECK, tell the user what it needs and wait.\\\"}}\""
           }
         ]
       }

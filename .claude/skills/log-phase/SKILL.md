@@ -1,19 +1,19 @@
 ---
 name: log-phase
-description: Update the {{GAME_NAME}} in-game progress log (ServerStorage/DevNotes/Progress) when a phase/step/system is finished, including the mandatory NOT YET TESTED audit. Use during every task's wrap-up, before the end-of-task summary, or when the user types /log-phase.
+description: Update the {{GAME_NAME}} progress log (devnotes/Progress.md in the repo) when a phase/step/system is finished, including the mandatory NOT YET TESTED audit. Use during every task's wrap-up, before the end-of-task summary, or when the user types /log-phase.
 ---
 
 # Update the {{GAME_NAME}} progress log
 
-There are ModuleScripts in `ServerStorage/DevNotes`. They never run; each is one comment block. The user may be a beginner and uses them to keep track, so keep them concise, plain and up to date.
-- `Progress` = what's open NOW (keep it under ~20k chars): each section's STATUS, every NOT YET TESTED item, TEMPORARY THINGS, OPEN QUESTIONS, NEXT UP. Rewrite outdated notes instead of appending.
-- `ProgressArchive` (then `ProgressArchive2`, `3`...) = the full write-up of finished work. Roblox scripts max out at 200,000 chars: when the newest archive passes ~180,000, make the next one and append there. NEVER read an archive whole (that costs ~30k tokens). Only append, or search them with `execute_luau` that returns just the matching lines.
+The log is two plain files in the repo's `devnotes/` folder. They are read with the normal file tools (no Studio needed, also while a playtest runs) and git shows every change to them. The user may be a beginner and uses them to keep track, so keep them concise, plain and up to date.
+- `devnotes/Progress.md` = what's open NOW (keep it under about 300 lines): each section's STATUS, every NOT YET TESTED item, NEEDS YOU, TEMPORARY THINGS, OPEN QUESTIONS, NEXT UP. Rewrite outdated notes instead of appending.
+- `devnotes/ProgressArchive.md` = the full write-up of finished work. It only grows. NEVER read it whole: add to its end, or search it with Grep and read the matching lines.
 
 ## 1. Read it
-`script_read game.ServerStorage.DevNotes.Progress` (stop any playtest first, because script_read fails while playing). Don't read the archive.
+Read `devnotes/Progress.md`. Don't read the archive.
 
 ## 2. Write the finished work up in the ARCHIVE
-Append a block for the finished item at the end of the newest archive, just before the closing `]]`, with `execute_luau`, e.g. `s:gsub("%]%]%s*return nil%s*$", block .. "\n]]\n\nreturn nil\n")` - check the replace count is 1 (the block must stay INSIDE the comment, never after `return nil`). Head it with its section and date, e.g. "POLISH STEPS - P2 SOUND SYSTEM (done 2026-01-05)". Never change other sections. The current task file names its section:
+Add a block for the finished item at the end of `devnotes/ProgressArchive.md` without reading the file: write the block to a file in the scratchpad with the Write tool, then append it in Bash with `cat "<scratch file>" >> devnotes/ProgressArchive.md`. Head it with its section and date as a `##` heading, e.g. "## POLISH STEPS - P2 SOUND SYSTEM (done 2026-01-05)". Never change earlier blocks. The current task file names its section:
 
 | Task file | Section |
 |-----------|---------|
@@ -24,6 +24,7 @@ Each task file's "PROGRESS LOG AND SAVING" section lists what that section must 
 ## 3. Refresh Progress (the short one)
 - **STATUS**: tick the finished item.
 - **NOT YET TESTED**: audit (below).
+- **NEEDS YOU**: anything waiting for the user, with click-by-click steps. Human checks (the fun check, the QA sign-off, publishing, the first-week numbers) go here with the user's answers once given.
 - **TEMPORARY THINGS**: anything added just for testing or as a placeholder, and when it should go.
 - **NEXT UP**: the next unticked item from the task files.
 
@@ -36,4 +37,4 @@ For the work just finished, list every feature, branch and edge case that was wr
 Remove items that have now been tested. Every "not tested" item in your end-of-task summary must also be in the log, and the other way round.
 
 ## 5. Write and confirm
-Edit Progress with `multi_edit` (small targeted edits) or execute_luau setting `.Source` in edit mode. To confirm, return only the changed part, e.g. the archive's last ~300 characters. Don't read either whole script back. In the progress update, say that the log was updated. Saving is done by the `save-game` skill.
+Edit `devnotes/Progress.md` with small targeted edits (the Edit tool). To confirm the archive, look at its last lines only (`tail -5 devnotes/ProgressArchive.md`). In the progress update, say that the log was updated. Both files go in the item's commit. Saving the game is done by the `save-game` skill.

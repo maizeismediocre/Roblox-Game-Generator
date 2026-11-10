@@ -3,6 +3,12 @@
 - `make-shortcuts.ps1` - makes the desktop shortcut for this game ("<Game> - Keep Building", with a Remote Control session named after the game; add `-NoRemoteControl` to leave that out).
   Run: `powershell -ExecutionPolicy Bypass -File tools\make-shortcuts.ps1 -ProjectDir "<this folder>" -Name "<Game Name>"`
 
+- `export_scripts.py` - copies every script out of the saved backup `.rbxl` into text files under `src/`, following the game tree (`src/ServerScriptService/Server/DataService.server.luau`), and deletes the files of scripts that no longer exist. The `save-game` skill runs it after every save, so git shows what changed in the code. `src/` is a copy only: the game doesn't read it. Needs Python 3.14 or newer and no add-ons (Studio packs place files with zstd, which older versions can't read).
+  Run: `py -I tools/export_scripts.py "<Game> Backup.rbxl" src`
+
+- `cloud_save_time.py` - prints when a place was last saved to Roblox and how many seconds ago (the `save-game` skill uses it to prove a cloud save landed). Sends only the place id. Needs only Python.
+  Run: `py -I tools/cloud_save_time.py <place id>`
+
 - `store_edit.py` - turns a raw store-page screenshot (`store_page/<thumbnails|icon|passes>/<name>_raw.png`) into the finished image `<name>.png` in the same folder, then deletes the raw. Thumbnails: 16:9 crop, 1920x1080, optional text overlay. Icons/passes: square crop, 512x512, no text. Needs Python + Pillow.
   Run: `py tools/store_edit.py <raw> [--text "PLAY WITH FRIENDS!"] [--pos bottom|top|top-left|...] [--focus 0.5,0.5] [--preview <dir>] [--keep-raw]`. `--preview` writes a phone-size thumbnail, or a tiny + circle-cropped icon, for checking.
 

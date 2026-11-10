@@ -14,6 +14,8 @@ param(
     [switch]$NoRemoteControl
 )
 $ProjectDir = (Resolve-Path $ProjectDir).Path.TrimEnd('\')
+# the folder goes into a cmd.exe command line, where %NAME% would be swapped for a variable's value
+if ($ProjectDir.Contains('%')) { throw "The project folder's path contains '%'. Move the project to a folder without it, then run this again." }
 $claude = (Get-Command claude -ErrorAction SilentlyContinue).Source
 if (-not $claude) { throw "Claude Code (claude) was not found on PATH. Install it or open a new terminal, then run this again." }
 # names can't hold these characters in a file name or break the cmd line

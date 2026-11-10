@@ -21,7 +21,7 @@ You are working in my open Roblox Studio session for "{{GAME_NAME}}" through the
 - Comment the code clearly. I am learning.
 
 ## PROGRESS LOG AND SAVING
-- Add or update a "POLISH STEPS" section in ServerStorage/DevNotes/Progress (never remove or change other sections), using the `log-phase` skill: which steps are complete, where the main scripts and configs are, which sound/animation slots are filled or still empty, any sounds flagged for licensing checks, and any known problems or decisions.
+- Add or update a "POLISH STEPS" section in `devnotes/Progress.md` (never remove or change other sections), using the `log-phase` skill: which steps are complete, where the main scripts and configs are, which sound/animation slots are filled or still empty, any sounds flagged for licensing checks, and any known problems or decisions.
 - Save with the `save-game` skill and commit after each step.
 
 ## POLISH STEP P1 — Audit

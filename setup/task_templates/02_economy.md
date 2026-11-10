@@ -18,7 +18,7 @@ You are working in my open Roblox Studio session for "{{GAME_NAME}}" through the
 - Comment the code clearly. I am learning.
 
 ## PROGRESS LOG AND SAVING
-- Add or update an "ECONOMY STEPS" section in ServerStorage/DevNotes/Progress (never remove or change other sections), using the `log-phase` skill.
+- Add or update an "ECONOMY STEPS" section in `devnotes/Progress.md` (never remove or change other sections), using the `log-phase` skill.
 - After each step, record: which steps are complete, where the main scripts and configs are, current prices and balance values, any known problems, and any decisions made.
 - Save with the `save-game` skill and commit after each step.
 
@@ -29,4 +29,5 @@ Before building anything, write a short economy plan (an approval checkpoint: de
 - Which upgrades are one-time purchases and which are recurring (consumables).
 - A spreadsheet-style table of every price and value, put into the config modules.
 
+<!-- GENERATE: if the genre has no currency loop (SETUP step 4), rewrite Economy Step 1 above as a rewards and unlocks plan with the same purpose: how fast a player earns stars/medals/coins, what each unlock costs, when the first unlock comes (within about 5 minutes) and how many hours the content lasts. Then delete this comment. -->
 <!-- GENERATE: the remaining economy steps for THIS game, each as "## ECONOMY STEP N — <Title>" with 3-6 specific bullets. Pick from what fits the pitch: gear/tool upgrade tiers (each tier visibly better and needed for harder content), area unlocks (gates + prices + a clear "locked" look), home/shop/base upgrades, consumables (short boosts, never pay-to-win), a prestige/rebirth loop that keeps cosmetics and collection, and a sink for late-game currency. Each step names its config module and its UI. -->

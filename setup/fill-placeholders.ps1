@@ -7,6 +7,13 @@ param(
     [Parameter(Mandatory)][string]$GameName,
     [Parameter(Mandatory)][string]$GameId
 )
+# The name goes into file names, skill headers and typed paths, so it must be plain (SETUP.md step 4).
+if ($GameName -cnotmatch '^[A-Za-z0-9]+( [A-Za-z0-9]+)*$') {
+    throw "GameName '$GameName' must be letters, digits and single spaces only (no : ' ! & - or other punctuation). The store title can have punctuation later."
+}
+if ($GameId -cnotmatch '^[A-Za-z][A-Za-z0-9]*$') {
+    throw "GameId '$GameId' must be letters and digits only, starting with a letter."
+}
 $ProjectDir = (Resolve-Path $ProjectDir).Path.TrimEnd('\')
 $map = [ordered]@{
     '{{GAME_NAME}}'   = $GameName

@@ -14,7 +14,7 @@ STATUS: NOT STARTED
 You are working in my open Roblox Studio session for "{{GAME_NAME}}" through the Studio MCP tools. The game works with placeholder models. Your job is to give it one consistent, polished art style. Inspect the existing models and the configs that point at them first, and keep every model's name and location so nothing else needs to change.
 
 ## PROGRESS LOG AND SAVING
-- Add or update an "ART PHASES" section in ServerStorage/DevNotes/Progress (never remove or change other sections), using the `log-phase` skill: which phases are done, the style rules, approved/rejected models, where the recipes live, and anything that still needs work.
+- Add or update an "ART PHASES" section in `devnotes/Progress.md` (never remove or change other sections), using the `log-phase` skill: which phases are done, the style rules, approved/rejected models, where the recipes live, and anything that still needs work.
 - Save with the `save-game` skill and commit after each phase.
 
 ## ART STYLE

@@ -9,14 +9,18 @@ description: Start (or restart) a {{GAME_NAME}} 2-player Studio test (server + 2
 
 ## Start it (the user's preferred way)
 1. `-Action shot` and look at the main Studio window's top-left toolbar to confirm the positions below (they are approximate and depend on the screen size; when you have proven them on this PC, write them in here with the date).
-2. Click the mode dropdown (normally says "Test", ≈ 50,61), take a screenshot, then click "Server".
+2. Click the mode dropdown (normally says "Test", ≈ 50,61), take a screenshot, then click "Server & Clients" (older Studio versions call it "Server").
 3. `-Action type -X 253 -Y 61 -Text 2`: the small box with the player icon, to the right of the red stop button. Type the number of clients.
 4. Click the blue play button (≈ 113,61).
 5. Check: `list_roblox_studios` shows one entry per window (name is null). Server-side `#game.Players:GetPlayers()` should be 2.
 
 Fallback that also worked: menu bar Test > Start Test Session > "Server and Clients" (F7) opens a Server window with 0 players. Then click Test > Add Clients in the Server window once per client.
 
+To end the session: bring the main Studio window (the one with the place's name) to the front, open the **Test** menu and click **End Session**. The red button in the toolbar and Shift+F5 do not end a multi-client session. Check with `list_roblox_studios` that only the main window is left.
+
 To pick up code changes, end the session and start a new one the same way. Every restart gives NEW window ids.
+
+Proven on 2026-11-10 (2560x1440, Studio maximised): mode dropdown (49,61), "Server & Clients" (70,160), client count box (254,62), play (113,62), Test menu (184,33), End Session (222,386). The server and both clients were up about 25 seconds after pressing play.
 
 ## Which window is which
 - Server window: `execute_luau` with datamodel Client fails ("Target is not reachable").

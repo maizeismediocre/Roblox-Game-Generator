@@ -11,7 +11,7 @@ Each file in `scripts/` is ONE `execute_luau` call. Read the file, replace any `
 
 ## 1. Connection and game check
 1. `list_roblox_studios` → `get_studio_state` → `search_game_tree path=Workspace max_depth=1`. This counts as the MCP check. If it fails, STOP and tell the user (Studio open? MCP server on?).
-2. `script_read game.ServerStorage.DevNotes.Progress` (the short log; never read an archive whole). Then run ONE `search_game_tree path=ServerScriptService max_depth=4` and confirm the services for the ticked phases exist. If the checklists, the log and the game disagree, STOP and explain.
+2. Read `devnotes/Progress.md` with the Read tool (the short log; never read the archive whole). Then run ONE `search_game_tree path=ServerScriptService max_depth=4` and confirm the services for the ticked phases exist. If the checklists, the log and the game disagree, STOP and explain.
 
 ## 2. Smoke test (`start_stop_play true` first, then wait ~3 s so the save has loaded)
 Run the scripts in the order of this table:

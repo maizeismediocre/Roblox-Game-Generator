@@ -2,7 +2,7 @@
 
 > **Disclaimer:** this guide is written for the **Claude Code terminal app (CLI)**, run from PowerShell. Using the Claude desktop app instead may not allow certain features this template relies on, such as the shortcut on your Windows desktop that starts Claude with a named Remote Control session and type the first message for you, and some typed commands. The normal chat in the Claude app can't build the game at all (it can't run the scripts, saves or git).
 
-A starter kit for making a Roblox game with Claude Code doing the building through the Roblox Studio MCP. Claude asks what genre you want (or rolls a random one you can reroll), invents an original game idea, writes a full step-by-step build plan for it, and then builds and tests the game in Studio task by task.
+A starter kit for making a Roblox game with Claude Code doing the building through the Roblox Studio MCP. Claude asks what genre you want (or rolls a random one you can reroll), invents an original game idea, writes a full step-by-step build plan for it, and then builds and tests the game in Studio task by task. It works on its own for hours at a time and stops for you at a few points: an early "is it fun?" check, a sign-off before the store pictures, publishing, and a look at the first week's player numbers. Games that depend on how the controls feel (racing, parkour, sports) get short controls checks too.
 
 You don't need to know how to code. You do need a Windows PC, a Roblox account and a paid Claude plan, and about 30 minutes for the one-time setup below. Do the steps **in order**: some of them need the one before.
 
@@ -17,7 +17,7 @@ You don't need to know how to code. You do need a Windows PC, a Roblox account a
 | This template | Yes | https://github.com/maizeismediocre/Roblox-Game-Generator |
 | Studio's MCP server (a setting in Studio, nothing to download) | Yes | https://create.roblox.com/docs/studio/mcp |
 | winget (Windows' app installer, used by the commands below; already on Windows 10/11) | Optional | https://learn.microsoft.com/en-us/windows/package-manager/winget/ |
-| Python (for the picture tools) | Optional | https://www.python.org/downloads/windows/ |
+| Python 3.14 or newer (runs the save tools and the picture tools) | Yes | https://www.python.org/downloads/windows/ |
 | Pillow and NumPy (Python add-ons for the picture tools) | Optional | https://pypi.org/project/pillow/ and https://pypi.org/project/numpy/ |
 | GitHub account (online backup) | Optional (recommended for an online backup) | https://github.com/signup |
 | GitHub CLI (lets Claude make the private backup repo) | Optional | https://cli.github.com/ |
@@ -86,10 +86,20 @@ Roblox sometimes moves menus. If yours look different, follow the current steps 
 
 This folder stays as your master copy. Each new game is made as a copy of it in a separate folder, so you can reuse the template for as many games as you like.
 
-### 6. Optional extras
-- **Python + Pillow + NumPy** (for making icons and store-page images later on; Claude asks before using them). Python: https://www.python.org/downloads/windows/ (tick "Add python.exe to PATH" when installing), Pillow: https://pypi.org/project/pillow/, NumPy: https://pypi.org/project/numpy/. Or in PowerShell:
+### 6. Python (Claude uses it every time it saves your game)
+Claude's save tools and picture tools are small Python programs, so Python must be installed. It has to be version 3.14 or newer: Roblox Studio packs its files in a way that older versions can't read.
+1. Open PowerShell, paste this and press Enter (say **Yes** if Windows asks for permission):
+   ```
+   winget install --id Python.Python.3.14 -e
+   ```
+   Or go to https://www.python.org/downloads/windows/, download the newest installer and run it. Tick **Add python.exe to PATH** on its first page.
+2. Close and reopen PowerShell, type `py --version` and press Enter. It should show `Python 3.14` or a higher number.
+
+Already have an older Python? Install 3.14 as well; the old one can stay. `py` uses the newest one by itself.
+
+### 7. Optional extras
+- **Pillow + NumPy** (Python add-ons for making icons and store-page images later on; Claude asks before using them). Add-ons are installed per Python version, so install them after Python 3.14. Pillow: https://pypi.org/project/pillow/, NumPy: https://pypi.org/project/numpy/. In PowerShell:
   ```
-  winget install --id Python.Python.3.12 -e
   py -m pip install pillow numpy
   ```
 - **GitHub backup** (keeps a copy of your game online, private). Recommended if you want an online backup of your work: without it, your game folder (the build plan, the backup copy of the game and Claude's notes on unfinished work) is only on this PC. The game itself is still saved to your Roblox account either way. Make a free account at https://github.com/signup, install the GitHub CLI from https://cli.github.com/, or in PowerShell:
@@ -111,8 +121,8 @@ This folder stays as your master copy. Each new game is made as a copy of it in 
 4. Type `read SETUP.md` and press Enter.
 5. Answer Claude's questions. They appear as a list of choices: use the **arrow keys** and **Enter** to pick one, or choose **Other** / just type to write your own answer.
 
-   Claude will also sometimes ask **"Do you want to proceed?"** before running a command or changing a file. Pick **Yes**, or **Yes, and don't ask again** for that kind of command, so it asks less often. Pick plain **Yes** (or **No**, then ask Claude what it's for) when the command installs something, deletes files outside the game folder, or is one you don't recognise. "Don't ask again" stays on for that whole kind of command in future sessions too.
-   - **Genre:** pick **Random** (reroll as often as you like), choose from the list, or type your own idea.
+   Claude will also sometimes ask **"Do you want to proceed?"** before running a command or changing a file. The template already approves its own everyday commands (saving, git, its picture and save tools), so this mostly comes up for something new. Pick **Yes**, or **Yes, and don't ask again** for that kind of command, so it asks less often. Pick plain **Yes** (or **No**, then ask Claude what it's for) when the command installs something, deletes files outside the game folder, or is one you don't recognise. "Don't ask again" stays on for that whole kind of command in future sessions too.
+   - **Genre:** pick **Random** (reroll as often as you like), choose from the list, or type your own idea. Any genre works. The template has a short profile for each genre on the list (what its main loop is and what it must have), and Claude builds the plan from it: a racing game gets real races and controls checks where you try the handling, a hide and seek game gets computer players so it can be played alone, and an obby gets stages and checkpoints with rewards in place of a shop.
    - **Game idea:** Claude shows a short pitch card. Say yes, ask for a new idea, change the genre, or type what you'd like changed.
    - **Folder:** where to make the game (e.g. Documents\Roblox Games\YourGame). This template stays untouched, so you can reuse it for the next game.
    - **GitHub:** only asked if you did the GitHub extra above.
@@ -126,9 +136,10 @@ This folder stays as your master copy. Each new game is made as a copy of it in 
 - Claude asks you to help with the first **Save to Roblox** (it creates the game on your Roblox account): check the owner and click **Create**.
 - It then asks you to turn on **Enable Studio Access to API Services** (needed for saving player data in tests): in Studio open **Game Settings** (in the **File** menu, or the **Game Settings** button on the **Home** tab), click **Security**, turn on **Enable Studio Access to API Services**, and click **Save**.
 - After that Claude works on its own: it builds, tests, saves and moves on. You can watch, but don't click around in Studio while it's working, because it uses Studio too.
+- **The fun check:** as soon as the main loop of the game can be played from start to finish (usually after the second or third build phase), Claude stops and asks you to play for about 10 minutes and say whether it's fun. This is the cheapest moment to change the idea, so be honest. Claude waits for your answer before building anything else.
 - **Hands off while Claude saves:** after every finished item Claude saves the game (Save to Roblox, then Save to File). To do this it moves your **real mouse and keyboard**, brings Studio to the front, and clicks through the menus. You can't use your PC while it does this: if you move the mouse, type, or switch windows, its clicks can land in the wrong place, and the save fails or something else gets clicked. Claude does the same for 2-player tests and model pictures. Saves happen often and without warning, so it's safest to leave the PC alone while Claude is building. If a save goes wrong because you used the PC, tell Claude and it will save again.
 - Claude sometimes takes pictures of the **whole screen** to check Studio, so keep private things (emails, passwords, bank pages, chats) closed or minimised while it works.
-- **Effort level:** before each task Claude says which effort level suits it. To change it, type `/effort high` (or `/effort medium`) and press Enter. Higher effort gives better 3D models and art but uses more of your Claude plan.
+- **Effort level:** each time Claude stops, it says which effort level suits the next task. To change it, type `/effort high` (or `/effort medium`) and press Enter before you tell it to continue. Higher effort gives better 3D models and art but uses more of your Claude plan.
 - **To stop Claude** in the middle of something, press **Esc**. Type a message to tell it what to do next.
 
 ### Every session after that
@@ -146,6 +157,7 @@ Claude Pro/Max plans have usage limits. If Claude says you've hit your limit, it
 |---------|-----|
 | `claude` is "not recognized" | Close and reopen PowerShell after installing. If it still fails, reinstall Claude Code (Part 1, step 3), or see https://code.claude.com/docs/en/troubleshoot-install. |
 | `git` is "not recognized" | Close and reopen PowerShell after installing Git. If it still fails, run the Git installer again (Part 1, step 2). |
+| `py` is "not recognized", or Claude says Python is missing or too old | Install Python 3.14 (Part 1, step 6), then close and reopen PowerShell and start Claude again. |
 | Claude says it can't log in, or your plan doesn't include Claude Code | Claude Code needs a Pro or Max plan. Type `/login` in Claude to sign in again. |
 | Claude says the Studio tools aren't connected | Studio must be open with a place, and its MCP server on (Part 1, step 4). If you opened Studio *after* Claude, type `/mcp` in Claude, pick **Roblox_Studio** and choose **Reconnect** (or type `/exit` and start Claude again). In Studio, **Assistant > ... > Settings > MCP Servers** shows a green light and "1 client connected" when Claude is connected. |
 | `mcp.bat` doesn't exist (the check says **False**) | Studio's MCP server isn't turned on yet (Part 1, step 4). |
@@ -161,18 +173,26 @@ Claude Pro/Max plans have usage limits. If Claude says you've hit your limit, it
 | Path | What it is |
 |------|------------|
 | `SETUP.md` | The first-run setup Claude follows (deleted from the game copy when done) |
-| `setup/` | Genre list, the task-file and instructions templates, the placeholder filler |
+| `setup/` | Genre list, the genre guide (`genre_guide.md`: one profile per genre, with `check_genres.py` to check the two files agree), the task-file and instructions templates, the placeholder filler |
 | `CLAUDE.md` | The rules Claude follows in every session |
 | `.mcp.json` | Connects Claude to Roblox Studio's MCP server automatically |
-| `.claude/settings.json` | Auto-approves the Studio MCP server and its tools (except inserting Creator Store models, which asks you first); reminds Claude where it was after `/clear` |
+| `.claude/settings.json` | Auto-approves the Studio MCP server and its tools (except inserting Creator Store models, which asks you first), plus the template's own everyday commands: git status/log/diff/add/commit/push, the Python tools in `tools/`, and the script that clicks, types and takes screenshots for saves and tests (it refuses to click or type in anything except Roblox Studio). Blocks force-pushes. Reminds Claude where it was after `/clear` |
 | `.claude/skills/` | Step-by-step skills: save-game, model-qa, new-character, seasonal-event, model-photos, log-phase, handoff, health-check, start-2p-test, screen-capture, player-text, add-asset |
 | `studio_tools/` | Studio tool modules (ModelKit: blocky model builder + quality checkers; SceneryScan) installed into the game in Build Phase 1 |
-| `tools/` | Picture tools (model cut-outs, store-page image editing, a font) and `make-shortcuts.ps1` |
+| `tools/` | Picture tools (model cut-outs, store-page image editing, a font), `export_scripts.py` (copies the game's scripts into `src/` as text), `cloud_save_time.py` (checks a save reached Roblox) and `make-shortcuts.ps1` |
+| `devnotes/` | Claude's progress log: `Progress.md` (what is open now, including anything waiting for you) and `ProgressArchive.md` (finished work) |
+| `src/` | Made in your game folder at the first save: a text copy of every script in the game, refreshed on each save, so the git history shows what changed in the code. The game doesn't read it |
 | `CREDITS.md` | Credits for outside assets whose licence asks for one (also shown in the game's Settings > Credits) |
 | `store_page/` | Where the store description, thumbnails and icons go |
 | `TEMPLATE_MASTER.txt` | Marks this folder as the master copy (setup copies instead of changing it) |
 
 ## How the work is organised
-- Numbered task files (`01_build.md` ... `07_store_page.md`), each a checklist: build, economy, art, polish, live-ops, quality QA, store page. Claude does the first unticked item, tests it itself, logs it in the game (ServerStorage/DevNotes), saves the place (Save to Roblox + a backup `.rbxl` file), commits, and moves on. It stops at the end of each task file or when the topic changes, so you can `/clear` and continue fresh.
+- Numbered task files (`01_build.md` ... `09_weekly_rotation.md`), each a checklist: build, economy, art, polish, live-ops foundations, quality QA, store page, launch, weekly rotation. Claude does the first unticked item, tests it itself, logs it in `devnotes/Progress.md`, saves the place (Save to Roblox + a backup `.rbxl` file + the script copies in `src/`), commits, and moves on. It stops at the end of each task file or when the topic changes, so you can `/clear` and continue fresh.
+- `01_build.md` starts with a genre checklist: the things the game must have to count as its genre, each with a test Claude runs. It is checked again in the quality QA, so a racing game stays a racing game and doesn't turn into a shop with upgrades.
+- A few items are marked "(HUMAN CHECK)". Claude can test rules and numbers, but it can't tell whether a game is fun, so at these it stops and waits for you however long that takes:
+  1. The fun check, early in `01_build.md`: you play the main loop for about 10 minutes. Games that depend on how the controls feel also have feel checks here: you try the controls for a few minutes and Claude tunes them to your answers.
+  2. The sign-off at the end of `06_quality_qa.md`: you play the finished game before the store pictures are taken.
+  3. Publishing, in `08_launch.md`: Claude writes a click-by-click launch checklist and you publish the game yourself (File > Publish to Roblox). Claude never publishes it.
+  4. The first-week review, in `08_launch.md`: you read a few numbers from the Creator Dashboard to Claude (it tells you where they are), and it proposes fixes.
+- The weekly rotation and seasonal events (`09_weekly_rotation.md`) are built after launch, and only if you choose to in the first-week review. They give returning players something new each week, so they are worth building once players are coming back.
 - Unfinished work is handed over in a "HANDOFF" note in the git commit, so the next session picks it up.
-- Claude won't publish the game unless you ask it to; normally you publish it yourself when it's ready (File > Publish to Roblox) and fill in the store page with the description and pictures from `store_page/`.

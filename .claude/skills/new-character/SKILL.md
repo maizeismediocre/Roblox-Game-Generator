@@ -59,7 +59,7 @@ Run the `model-qa` skill (Check, FindClipping, FindFlicker all empty; Turnaround
 
 ## 6. Config
 - Add it to the config named above with values matched to same-area, same-rarity ones, and to the spawn table(s) with a weight like its peers.
-- **Weekly rotation:** a new rotating one MUST get `RotationFrom = <current week + 2>` (or `From`), so adding it doesn't reshuffle the running week or past weeks. Prove it: the current week's rotation is the same before and after.
+- **Weekly rotation** (only once `09_weekly_rotation.md` has built it; before that, skip this line): a new rotating one MUST get `RotationFrom = <current week + 2>` (or `From`), so adding it doesn't reshuffle the running week or past weeks. Prove it: the current week's rotation is the same before and after.
 - Run the game's DevTools test suites for rotation/config (if they exist) - all PASS.
 
 ## 6b. Its sound
